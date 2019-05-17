@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-![](man/figures/EcoNum-logo.png)
+<img src="man/figures/EcoNum-logo.png" width="50" height="50" align="right"/>
 
 # coral.growth
 
@@ -40,12 +40,15 @@ remotes::install_github("econum/seal.econum", build_vignettes = TRUE)
 
   - [Engels Guyliann](https://github.com/GuyliannEngels)
 
-  - [Philippe Grosjean](https://github.com/phgrosjean)
+  - [Philippe
+Grosjean](https://github.com/phgrosjean)
 
 ## Note
 
-![](man/figures/site-title.png) This package is developped with the
-SciViews Box 2019. To learn more, please visit <http://www.sciviews.org>
+<img src="man/figures/site-title.png" width="130" height="50" align="left"/>
+This package is developped with the SciViews Box 2019.
+
+To learn more, please visit <http://www.sciviews.org>
 
 -----
 
