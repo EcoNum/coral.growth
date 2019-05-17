@@ -36,11 +36,9 @@ You can install the devlopment version of coral.growth from Github with:
 remotes::install_github("econum/seal.econum", build_vignettes = TRUE)
 ```
 
-## Authors
+## Contributors
 
   - [Engels Guyliann](https://github.com/GuyliannEngels)
-
-## Supervisor
 
   - [Philippe Grosjean](https://github.com/phgrosjean)
 

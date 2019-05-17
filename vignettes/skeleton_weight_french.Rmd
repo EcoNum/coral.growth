@@ -1,11 +1,5 @@
 ---
 title: "Conversion de la masse immergé en masse squelettique."
-author: "Engels Guyliann"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Conversion de la masse immergé en masse squelettique.}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r, include = FALSE}
@@ -18,7 +12,6 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(coral.growth)
 ```
-
 
 # Introduction
 
@@ -62,14 +55,16 @@ rho_aragonite <- 2930
 Les étapes citées ci-dessus peuvent être facilement placé dans une fonction.
 
 ```{r}
-skeleton_weight <- function(buoyant_weight, S, T, P = 0, rho_aragonite = 2930){
+skeleton_weight <- function(buoyant_weight, S, T, 
+                            P = 0, rho_aragonite = 2930){
   x <- seacarb::rho(S = S, T = T, P = P)
   y <- buoyant_weight / (1 - (x / rho_aragonite))
   attributes(y) <- NULL
   y
 }
 
-(x <- skeleton_weight(buoyant_weight = 1.5, S = 35, T = 25, P = 0, rho_aragonite = 2930))
+(x <- skeleton_weight(buoyant_weight = 1.5, 
+                      S = 35, T = 25, P = 0, rho_aragonite = 2930))
 ```
 
 
