@@ -1,6 +1,6 @@
 Package: coral.growth
 Title: Use of buoyant weight to compute the growth rate
-Version: 0.0.0.9000
+Version: 0.1.0
 Authors@R: person("guyliann", "engels", email = "guyliann.engels@umons.ac.be", role = c("aut", "cre"))
 Description: The growth rate is calculated from the skeleton weight obtained by the conversion of the buoyant weight.
 License: CC0
