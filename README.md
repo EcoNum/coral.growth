@@ -11,6 +11,8 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![License:
 CC0-1.0](https://licensebuttons.net/l/zero/1.0/80x15.png)](http://creativecommons.org/publicdomain/zero/1.0/)
+[![Travis build
+status](https://travis-ci.org/EcoNum/coral.growth.svg?branch=master)](https://travis-ci.org/EcoNum/coral.growth)
 <!-- badges: end -->
 
 Coral reefs are considered one of the most biodiverse marine ecosystems
