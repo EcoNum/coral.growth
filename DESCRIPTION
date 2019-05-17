@@ -1,15 +1,17 @@
 Package: coral.growth
-Title: What the Package Does (One Line, Title Case)
+Title: Use of buoyant weight to compute the growth rate
 Version: 0.0.0.9000
-Authors@R: 
-    person(given = "First",
-           family = "Last",
-           role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: What license it uses
+Authors@R: person("guyliann", "engels", email = "guyliann.engels@umons.ac.be", role = c("aut", "cre"))
+Description: The growth rate is calculated from the skeleton weight obtained by the conversion of the buoyant weight.
+License: CC0
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat
+VignetteBuilder: knitr
+Imports: 
+    seacarb
