@@ -5,3 +5,6 @@
 ^CODE_OF_CONDUCT\.md$
 
 ^vignettes/skeleton_weight_french\.Rmd$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
