@@ -1,0 +1,55 @@
+---
+title: "Calcul de la croissance à partir de la masse squelettique"
+bibliography: "biblio.bib"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(coral.growth)
+```
+
+# Introduction
+
+La croissance des coraux peut être déterminée à partir de la masse squelettique (obtenu par conversion de la masse immergée [@Jokiel1978]).
+
+Sipkema et al. [-@Sipkema2006] ont mis en évidence plusieurs modèles de croissace sur différentes espèces d'éponges. Ces modèles semblent être également valable pour les coraux dont le modèle linéaire ou encore le modèle exponentiel [@Osinga2011].
+
+Le premier modèle est le modèle de croissance linéaire suivant l'équation :
+
+$$X_t = X_0 + kt$$
+
+avec $X_t$ étant la masse au temps t, $X_0$ la masse initial au temps 0, $k$ la constante de croissance linéaire et $t$ le temps
+
+Un second modèle est le modèle de croissance exponentielle suivant l'équation suivante : 
+
+$$X_t = X_0 \times e^{bt}$$
+
+avec $X_t$ étant la masse au temps t, $X_0$ la masse initial au temps 0, $b$ la constante de croissance exponentielle et $t$ le temps.
+
+Osinga et son équipe [-@Osinga2011] émettent l'hypothèse suivante que les espèces branchues vont avoir une développement de type exponentielle alors que les espèce encroutante vont avoir une croissance linéaire.
+
+Partons d'un exemple fictif pour illustrer ces deux situations, avec un organisme de 1 grammes avec un taux de croissance linéaire et exponentiel de 0.1.
+
+```{r}
+w_ini <- 1
+coef <- 0.1
+example <- tibble::tibble(
+  temps = c(0:8, 0:8), 
+  mod = c(rep("lin", 9), rep("expo", 9)),
+  masse = dplyr::case_when(mod == "lin" ~ w_ini + (coef*temps),
+                           mod == "expo" ~ w_ini*exp(coef*temps)))
+
+chart::chart(example, masse~temps %col=% mod) +
+  ggplot2::geom_point() +
+  ggplot2::geom_line() +
+  ggplot2::labs( color = "Modèle")
+```
+
+
+# bibliographie

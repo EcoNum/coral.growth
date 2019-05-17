@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-<img src="man/figures/EcoNum-logo.png" width="50" height="50" align="right"/>
+<img src="man/figures/EcoNum-logo.png" width="70" height="70" align="right"/>
 
 # coral.growth
 

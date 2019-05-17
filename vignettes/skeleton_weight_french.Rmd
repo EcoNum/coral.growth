@@ -1,5 +1,6 @@
 ---
-title: "Conversion de la masse immergé en masse squelettique."
+title: "Conversion de la masse immergée en masse squelettique."
+bibliography: "biblio.bib"
 ---
 
 ```{r, include = FALSE}
@@ -25,7 +26,7 @@ Le croissance des coraux est un processus complexe. L'utilisation de la méthode
 
 - une méthode sensible (même à moins de 12H)
 
-Le principe d'archimède permet de convertir le poids immergé en poids du squelette via la formule suivante :
+Le principe d'archimède permet de convertir le poids immergé en poids du squelette via la formule suivante [@Jokiel1978]:
 
 $$w_{a} = \frac{w_{w}}{1 - \frac{D_w}{D_a}}$$
 
@@ -67,4 +68,6 @@ skeleton_weight <- function(buoyant_weight, S, T,
                       S = 35, T = 25, P = 0, rho_aragonite = 2930))
 ```
 
+
+# bibliographie
 

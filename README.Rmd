@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 ```
 
 
-<img src="man/figures/EcoNum-logo.png" width="50" height="50" align="right"/>
+<img src="man/figures/EcoNum-logo.png" width="70" height="70" align="right"/>
 
 # coral.growth
 

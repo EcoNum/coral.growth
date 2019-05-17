@@ -5,11 +5,11 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Conversion de la masse immergé en masse squelettique. • coral.growth</title>
+<title>Conversion de la masse immergée en masse squelettique. • coral.growth</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Conversion de la masse immergé en masse squelettique.">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Conversion de la masse immergée en masse squelettique.">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -53,7 +53,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/skeleton_weight_french.html">Conversion de la masse immergé en masse squelettique.</a>
+      <a href="../articles/growth_rate_french.html">Calcul de la croissance à partir de la masse squelettique</a>
+    </li>
+    <li>
+      <a href="../articles/skeleton_weight_french.html">Conversion de la masse immergée en masse squelettique.</a>
     </li>
   </ul>
 </li>
@@ -70,7 +73,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Conversion de la masse immergé en masse squelettique.</h1>
+      <h1>Conversion de la masse immergée en masse squelettique.</h1>
             
       
       
@@ -91,10 +94,10 @@
 <li><p>une méthode non destructive,</p></li>
 <li><p>une méthode sensible (même à moins de 12H)</p></li>
 </ul>
-<p>Le principe d’archimède permet de convertir le poids immergé en poids du squelette via la formule suivante :</p>
+<p>Le principe d’archimède permet de convertir le poids immergé en poids du squelette via la formule suivante <span class="citation">(Jokiel, Maragos, and Franzisket 1978)</span>:</p>
 <p><span class="math display">\[w_{a} = \frac{w_{w}}{1 - \frac{D_w}{D_a}}\]</span></p>
 <p>où <span class="math inline">\(w_{a}\)</span> est le poids du squelette (principalement composé d’aragonite), <span class="math inline">\(w_{w}\)</span> est le poids immergé, <span class="math inline">\(D_w\)</span> est densité de l’eau de mer (qui peut être calculé via la fonction <code>rho()</code> du package <code>seacarb</code>), <span class="math inline">\(D_a\)</span> est la densité de l’aragonite qui est de <span class="math inline">\(2390 \ g/dm^3\)</span>.</p>
-<p>Le changement de poids au cours du temps peut être employé afin de quantifier le taux de calcification ou autrement dit le taux de croissance. Il a été démontré que le pourcentage d’augementation de la masse du squelette au cours du temps dépend du poids initiale de la bouture. La présence de masse morte au sein des coraux est un problème dans la détermination du taux de croissance véritable des boutures <span class="citation">[@Jokiel1978]</span>.</p>
+<p>Le changement de poids au cours du temps peut être employé afin de quantifier le taux de calcification ou autrement dit le taux de croissance. Il a été démontré que le pourcentage d’augementation de la masse du squelette au cours du temps dépend du poids initiale de la bouture. La présence de masse morte au sein des coraux est un problème dans la détermination du taux de croissance véritable des boutures <span class="citation">(Jokiel, Maragos, and Franzisket 1978)</span>.</p>
 </div>
 <div id="fonction" class="section level1">
 <h1 class="hasAnchor">
@@ -125,6 +128,15 @@
 <a class="sourceLine" id="cb4-10" data-line-number="10">                      <span class="dt">S =</span> <span class="dv">35</span>, <span class="dt">T =</span> <span class="dv">25</span>, <span class="dt">P =</span> <span class="dv">0</span>, <span class="dt">rho_aragonite =</span> <span class="dv">2930</span>))</a>
 <a class="sourceLine" id="cb4-11" data-line-number="11"><span class="co">#&gt; [1] 2.305079</span></a></code></pre></div>
 </div>
+<div id="bibliographie" class="section level1 unnumbered">
+<h1 class="hasAnchor">
+<a href="#bibliographie" class="anchor"></a>bibliographie</h1>
+<div id="refs" class="references">
+<div id="ref-Jokiel1978">
+<p>Jokiel, Paul L., JE Maragos, and L Franzisket. 1978. “Coral growth: buoyant weight technique.” In <em>Coral Reefs: Research Methods</em>, edited by Bernan Associates, 541. October. UNESCO.</p>
+</div>
+</div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -134,6 +146,7 @@
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#introduction">Introduction</a></li>
       <li><a href="#fonction">Fonction</a></li>
+      <li><a href="#bibliographie">bibliographie</a></li>
       </ul>
 </div>
       </div>
