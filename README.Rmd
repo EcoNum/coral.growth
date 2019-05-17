@@ -13,9 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-
-<img src="man/figures/EcoNum-logo.pdf" width="60" height="60" align="right"/>
-
+![](man/figures/EcoNum-logo.png){ width='15%' align='right' }
 
 # coral.growth
 
@@ -49,7 +47,7 @@ remotes::install_github("econum/seal.econum", build_vignettes = TRUE)
 
 ## Note
 
-![](man/figures/site-title.png) This package is developped with the SciViews Box 2019. To learn more, please visit <http://www.sciviews.org>
+![](man/figures/site-title.png){ width='10%' }  This package is developped with the SciViews Box 2019. To learn more, please visit <http://www.sciviews.org>
 
 --------------
 
