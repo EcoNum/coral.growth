@@ -24,17 +24,24 @@ Le premier modèle est le modèle de croissance linéaire suivant l'équation :
 
 $$X_t = X_0 + kt$$
 
-avec $X_t$ étant la masse au temps t, $X_0$ la masse initial au temps 0, $k$ la constante de croissance linéaire et $t$ le temps
+avec $X_t$ étant la masse au temps t, $X_0$ la masse initial au temps 0, $k$ la constante de croissance linéaire et $t$ le temps. Si la masse des coraux est monitorée en gramme et le temps en jour, nous aurons une constante exprimé en $g/jour$. Le taux de croissance peut être obtenu via l'équation suivante :
+
+$$k =  \frac{X_t - X_0}{t - t_0}$$
+Il s'agit simplement de la pente de la droite.
 
 Un second modèle est le modèle de croissance exponentielle suivant l'équation suivante : 
 
 $$X_t = X_0 \times e^{bt}$$
 
-avec $X_t$ étant la masse au temps t, $X_0$ la masse initial au temps 0, $b$ la constante de croissance exponentielle et $t$ le temps.
+avec $X_t$ étant la masse au temps t, $X_0$ la masse initial au temps 0, $b$ la constante de croissance exponentielle et $t$ le temps. Le taux de croissance $b$ peut être obtenu via l'aquation suivante :
+
+$$ln(X_t) = ln(X_0 \times e^{bt})\\ ln(X_t) = ln(X_0) + bt \\ ln(X_t) - ln(X_0) = bt\\ \frac{ln(X_t) - ln(X_0)}{t}= b \\ \frac{ ln( \frac{X_t}{X_0})}{t} = b$$
+
+Les deux taux de croissance obtenus ne sont de ce fait pas du tout comparable.
 
 Osinga et son équipe [-@Osinga2011] émettent l'hypothèse suivante que les espèces branchues vont avoir une développement de type exponentielle alors que les espèce encroutante vont avoir une croissance linéaire.
 
-Partons d'un exemple fictif pour illustrer ces deux situations, avec un organisme de 1 grammes avec un taux de croissance linéaire et exponentiel de 0.1.
+Partons d'un exemple fictif pour illustrer ces deux situations, avec un organisme de 1 grammes avec un taux de croissance linéaire et exponentiel similaire de 0.1.
 
 ```{r}
 w_ini <- 1

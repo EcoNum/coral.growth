@@ -18,9 +18,6 @@
 #'
 skeleton_weight <- function(buoyant_weight, S, T, P = 0, rho_aragonite = 2930){
 
-   if (buoyant_weight < 0)
-    stop("buoyant weight must be positive")
-
   x <- seacarb::rho(S = S, T = T, P = P)
   y <- buoyant_weight / (1 - (x / rho_aragonite))
   attributes(y) <- NULL

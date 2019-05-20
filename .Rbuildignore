@@ -12,3 +12,4 @@
 ^vignettes/biblio\.bib$
 ^vignettes/growth_rate_french\.Rmd$
 ^\.travis\.yml$
+^data-raw$
