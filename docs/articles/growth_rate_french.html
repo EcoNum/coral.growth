@@ -101,12 +101,15 @@
 <p>Sipkema et al. <span class="citation">(2006)</span> ont mis en évidence plusieurs modèles de croissace sur différentes espèces d’éponges. Ces modèles semblent être également valable pour les coraux dont le modèle linéaire ou encore le modèle exponentiel <span class="citation">(Osinga et al. 2011)</span>.</p>
 <p>Le premier modèle est le modèle de croissance linéaire suivant l’équation :</p>
 <p><span class="math display">\[X_t = X_0 + kt\]</span></p>
-<p>avec <span class="math inline">\(X_t\)</span> étant la masse au temps t, <span class="math inline">\(X_0\)</span> la masse initial au temps 0, <span class="math inline">\(k\)</span> la constante de croissance linéaire et <span class="math inline">\(t\)</span> le temps</p>
+<p>avec <span class="math inline">\(X_t\)</span> étant la masse au temps t, <span class="math inline">\(X_0\)</span> la masse initial au temps 0, <span class="math inline">\(k\)</span> la constante de croissance linéaire et <span class="math inline">\(t\)</span> le temps. Si la masse des coraux est monitorée en gramme et le temps en jour, nous aurons une constante exprimé en <span class="math inline">\(g/jour\)</span>. Le taux de croissance peut être obtenu via l’équation suivante :</p>
+<p><span class="math display">\[k =  \frac{X_t - X_0}{t - t_0}\]</span> Il s’agit simplement de la pente de la droite.</p>
 <p>Un second modèle est le modèle de croissance exponentielle suivant l’équation suivante :</p>
 <p><span class="math display">\[X_t = X_0 \times e^{bt}\]</span></p>
-<p>avec <span class="math inline">\(X_t\)</span> étant la masse au temps t, <span class="math inline">\(X_0\)</span> la masse initial au temps 0, <span class="math inline">\(b\)</span> la constante de croissance exponentielle et <span class="math inline">\(t\)</span> le temps.</p>
+<p>avec <span class="math inline">\(X_t\)</span> étant la masse au temps t, <span class="math inline">\(X_0\)</span> la masse initial au temps 0, <span class="math inline">\(b\)</span> la constante de croissance exponentielle et <span class="math inline">\(t\)</span> le temps. Le taux de croissance <span class="math inline">\(b\)</span> peut être obtenu via l’aquation suivante :</p>
+<p><span class="math display">\[ln(X_t) = ln(X_0 \times e^{bt})\\ ln(X_t) = ln(X_0) + bt \\ ln(X_t) - ln(X_0) = bt\\ \frac{ln(X_t) - ln(X_0)}{t}= b \\ \frac{ ln( \frac{X_t}{X_0})}{t} = b\]</span></p>
+<p>Les deux taux de croissance obtenus ne sont de ce fait pas du tout comparable.</p>
 <p>Osinga et son équipe <span class="citation">(2011)</span> émettent l’hypothèse suivante que les espèces branchues vont avoir une développement de type exponentielle alors que les espèce encroutante vont avoir une croissance linéaire.</p>
-<p>Partons d’un exemple fictif pour illustrer ces deux situations, avec un organisme de 1 grammes avec un taux de croissance linéaire et exponentiel de 0.1.</p>
+<p>Partons d’un exemple fictif pour illustrer ces deux situations, avec un organisme de 1 grammes avec un taux de croissance linéaire et exponentiel similaire de 0.1.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">w_ini &lt;-<span class="st"> </span><span class="dv">1</span></a>
 <a class="sourceLine" id="cb2-2" data-line-number="2">coef &lt;-<span class="st"> </span><span class="fl">0.1</span></a>
 <a class="sourceLine" id="cb2-3" data-line-number="3">example &lt;-<span class="st"> </span>tibble<span class="op">::</span><span class="kw"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span>(</a>
