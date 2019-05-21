@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Buoyant weight of corals over 56 days — coral_growth • coral.growth</title>
+<title>Buoyant weight of corals over 97 days — coral_growth1 • coral.growth</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,7 +30,7 @@
 
 
 
-<meta property="og:title" content="Buoyant weight of corals over 56 days — coral_growth" />
+<meta property="og:title" content="Buoyant weight of corals over 97 days — coral_growth1" />
 
 <meta property="og:description" content="Buoyant weight of corals over time. The measurements extend over 56 days." />
 <meta name="twitter:card" content="summary" />
@@ -117,9 +117,9 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Buoyant weight of corals over 56 days</h1>
+    <h1>Buoyant weight of corals over 97 days</h1>
     <small class="dont-index">Source: <a href='https://github.com/EcoNum/coral.growth/blob/master/R/data.R'><code>R/data.R</code></a></small>
-    <div class="hidden name"><code>coral_growth.Rd</code></div>
+    <div class="hidden name"><code>coral_growth1.Rd</code></div>
     </div>
 
     <div class="ref-description">
@@ -128,12 +128,13 @@
     
     </div>
 
-    <pre class="usage"><span class='no'>coral_growth</span></pre>
+    <pre class="usage"><span class='no'>coral_growth1</span></pre>
         
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
     <p>A data frame with 5 variables and 302 observations:</p><dl class='dl-horizontal'>
 <dt><code>id</code></dt><dd><p>A <strong>factor</strong> with 10 levels.</p></dd>
+<dt><code>species</code></dt><dd><p>Coral species.</p></dd>
 <dt><code>date</code></dt><dd><p>Number day.</p></dd>
 <dt><code>weight</code></dt><dd><p>Buoyant weight (in g).</p></dd>
 <dt><code>salinity</code></dt><dd><p>Salinity (in PSU).</p></dd>
@@ -142,15 +143,17 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>coral_growth</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/class'>class</a></span>(<span class='no'>coral_growth</span>)</div><div class='output co'>#&gt; [1] "data.frame"</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/head'>head</a></span>(<span class='no'>coral_growth</span>)</div><div class='output co'>#&gt;   id                date weight salinity temperature
-#&gt; 1  1 2018-10-23 14:15:00  1.648     32.9        25.3
-#&gt; 2  2 2018-10-23 14:15:00  0.750     32.9        25.3
-#&gt; 3  3 2018-10-23 14:15:00  0.429     32.9        25.3
-#&gt; 4  4 2018-10-23 14:15:00  0.588     32.9        25.3
-#&gt; 5  5 2018-10-23 14:15:00  0.933     32.9        25.3
-#&gt; 6  6 2018-10-23 14:15:00  0.629     32.9        25.3</div><div class='input'>
-</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>coral_growth1</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/class'>class</a></span>(<span class='no'>coral_growth1</span>)</div><div class='output co'>#&gt; [1] "tbl_df"     "tbl"        "data.frame"</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/head'>head</a></span>(<span class='no'>coral_growth1</span>)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 6 x 6</span><span>
+#&gt;   id    species   date                weight salinity temperature
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dttm&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 1     s.hystrix 2019-02-11 </span><span style='color: #949494;'>14:20:00</span><span>  0.415     35.1        25.1
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> 18    s.hystrix 2019-02-11 </span><span style='color: #949494;'>14:20:00</span><span>  0.795     35.1        25.1
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> 25    s.hystrix 2019-02-11 </span><span style='color: #949494;'>14:20:00</span><span>  0.543     35.1        25.1
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> 27    s.hystrix 2019-02-11 </span><span style='color: #949494;'>14:20:00</span><span>  0.67      35.1        25.1
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> 31    s.hystrix 2019-02-11 </span><span style='color: #949494;'>14:20:00</span><span>  1.07      35.1        25.1
+#&gt; </span><span style='color: #BCBCBC;'>6</span><span> 39    s.hystrix 2019-02-11 </span><span style='color: #949494;'>14:20:00</span><span>  1.26      35.1        25.1</div><div class='input'>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

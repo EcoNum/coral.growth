@@ -12,4 +12,4 @@ coral_growth %>.%
          date = (as.numeric(difftime(date, date[1], units = "days")))) -> coral_growth
 
 # To include it as a dataset inside the package
-usethis::use_data(coral_growth, version = 3)
+usethis::use_data(coral_growth, version = 3, overwrite = TRUE)

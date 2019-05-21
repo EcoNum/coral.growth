@@ -9,7 +9,7 @@ readr::read_csv(coral_url,
                            weight = col_double(),
                            temperature = col_double(),
                            salinity = col_double() )) %>.%
-  filter(., id %in% c(1, 27, 50, 25, 18, 69, 46, 82, 31, 39, 53, 83)) %>.%
+  filter(., id %in% c(1, 27, 25, 18, 69, 46, 82, 31, 39, 53, 83)) %>.%
   arrange(., date) %>.%
   mutate(.,
          species = factor(species),
@@ -26,4 +26,4 @@ t <- t[, c("id", "species", "date", "weight",
 coral_growth1 <- t
 
 # To include it as a dataset inside the package
-usethis::use_data(coral_growth1, version = 3)
+usethis::use_data(coral_growth1, version = 3, overwrite = TRUE)

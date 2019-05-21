@@ -58,5 +58,60 @@ chart::chart(example, masse~temps %col=% mod) +
   ggplot2::labs( color = "Modèle")
 ```
 
+# Croissance exponentielle 
+
+## Cas théorique 
+
+## Application
+
+as concret
+
+```{r}
+library(coral.growth)
+cg <- read("coral_growth", package = "coral.growth")
+```
+
+
+```{r}
+growth_rate <- function(skw_t, skw_ini, date_t, date_ini = 0, 
+                    method = "exponential") {
+  
+  # implemented method
+  met <- c("exponential", "linear", "linear_std")
+  # check method
+  if(!any(met %in% method))
+    stop("the method is not implemented. see the help page")
+  
+  # method
+  if (method == "exponential") { 
+    g_expo <- (log(skw_t/skw_ini)/(date_t - date_ini))*100
+  } else if (method == "linear") { 
+    g_lin <- (skw_t/skw_ini)/(date_t - date_ini)
+  } else if (method == "linear_std") {
+    g_lin_std <- (((skw_t/skw_ini)/skw_ini)/(date_t - date_ini))*100
+  }
+}
+```
+
+
+```{r}
+cg$skw <- skeleton_weight(buoyant_weight = cg$weight, S = cg$salinity, T = cg$temperature)
+
+cg %>.%
+  filter(., id == "1") -> cg
+
+cg %>.%
+  mutate(.,
+         skw_lag = lag(skw),
+         dd_lag = lag(date),
+         gr = growth_rate(skw_t = skw, skw_ini = skw_lag, 
+                          date_t = date, date_ini = dd_lag, 
+                          method = "exponential"),
+         gr1 = log(skw / skw_lag)/(date - dd_lag),
+         gr2 = gr_expo(skw_t = skw, skw_ini = skw_lag, 
+                       date_t = date, date_ini = dd_lag),
+         gg = gr/gr1) -> cg
+```
+
 
 # bibliographie

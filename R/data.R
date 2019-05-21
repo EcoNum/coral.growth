@@ -18,7 +18,7 @@
 #'
 "coral_growth"
 
-#' Buoyant weight of corals over 56 days
+#' Buoyant weight of corals over 97 days
 #'
 #' Buoyant weight of corals over time. The measurements extend over 56 days.
 #'

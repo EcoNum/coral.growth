@@ -14,6 +14,7 @@ Suggests:
     testthat
 VignetteBuilder: knitr
 Imports: 
-    seacarb
+    seacarb,
+    magrittr
 URL: https://github.com/EcoNum/coral.growth
 BugReports: https://github.com/EcoNum/coral.growth/issues
