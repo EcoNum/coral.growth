@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Articles • coral.growth</title>
+<title>Compute the growth rate — growth_rate • coral.growth</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,7 +30,10 @@
 
 
 
-<meta property="og:title" content="Articles" />
+<meta property="og:title" content="Compute the growth rate — growth_rate" />
+
+<meta property="og:description" content="The determination of the growth rate is a important parameter. Indeed, the growth rate can be used to compare different individuals. There are several methods to compute the growth rate." />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -47,7 +50,7 @@
   </head>
 
   <body>
-    <div class="container template-article-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -114,18 +117,68 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Articles</h1>
+    <h1>Compute the growth rate</h1>
+    <small class="dont-index">Source: <a href='https://github.com/EcoNum/coral.growth/blob/master/R/growth_rate.R'><code>R/growth_rate.R</code></a></small>
+    <div class="hidden name"><code>growth_rate.Rd</code></div>
     </div>
 
-    <div class="section ">
-      <h3>All vignettes</h3>
-      <p class="section-desc"></p>
-
-      <ul>
-        <li><a href="growth_rate_french.html">Calcul de la croissance à partir de la masse squelettique</a></li>
-        <li><a href="skeleton_weight_french.html">Conversion de la masse immergée en masse squelettique.</a></li>
-      </ul>
+    <div class="ref-description">
+    
+    <p>The determination of the growth rate is a important parameter. Indeed, the growth rate can be used to compare different individuals. There are several methods to compute the growth rate.</p>
+    
     </div>
+
+    <pre class="usage"><span class='fu'>growth_rate</span>(<span class='no'>skw_t</span>, <span class='no'>skw_ini</span>, <span class='no'>date_t</span>, <span class='kw'>date_ini</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"exponential"</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>skw_t</th>
+      <td><p>The weight at time t</p></td>
+    </tr>
+    <tr>
+      <th>skw_ini</th>
+      <td><p>The weight at initial time</p></td>
+    </tr>
+    <tr>
+      <th>date_t</th>
+      <td><p>The number day at time t</p></td>
+    </tr>
+    <tr>
+      <th>date_ini</th>
+      <td><p>The number day at initial time</p></td>
+    </tr>
+    <tr>
+      <th>method</th>
+      <td><p>The method to be employed. See the description to know the different methods</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>The growth rate</p>
+    
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+<span class='fu'>growth_rate</span>(<span class='kw'>skw_t</span> <span class='kw'>=</span> <span class='fl'>1.2</span>, <span class='kw'>skw_ini</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>date_t</span> <span class='kw'>=</span> <span class='fl'>7</span>, <span class='kw'>date_ini</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+<span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"exponential"</span>)</div><div class='output co'>#&gt; [1] 2.604594</div><div class='input'>
+## See \url{https://econum.github.io/coral.growth/articles/} for more examples
+
+</div></pre>
+  </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#value">Value</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
+
   </div>
 </div>
 

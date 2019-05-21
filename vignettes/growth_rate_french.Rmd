@@ -11,7 +11,7 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
-library(coral.growth)
+SciViews::R
 ```
 
 # Introduction
@@ -108,7 +108,7 @@ cg %>.%
                           date_t = date, date_ini = dd_lag, 
                           method = "exponential"),
          gr1 = log(skw / skw_lag)/(date - dd_lag),
-         gr2 = gr_expo(skw_t = skw, skw_ini = skw_lag, 
+         gr2 = growth_rate(skw_t = skw, skw_ini = skw_lag, 
                        date_t = date, date_ini = dd_lag),
          gg = gr/gr1) -> cg
 ```
