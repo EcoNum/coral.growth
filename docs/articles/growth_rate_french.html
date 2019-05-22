@@ -94,7 +94,7 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">SciViews<span class="op">::</span>R</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="co">#&gt; ── Attaching packages ────────────────────────────────────────────────────────────────────────── SciViews::R 1.1.0 ──</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="co">#&gt; ── Attaching packages ───────────────────────────────────────── SciViews::R 1.1.0 ──</span></a>
 <a class="sourceLine" id="cb1-3" data-line-number="3"><span class="co">#&gt; ✔ SciViews  1.1.0        ✔ purrr     0.3.2   </span></a>
 <a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co">#&gt; ✔ chart     1.3.0        ✔ readr     1.3.1   </span></a>
 <a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co">#&gt; ✔ flow      1.0.0        ✔ tidyr     0.8.3   </span></a>
@@ -103,25 +103,30 @@
 <a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co">#&gt; ✔ forcats   0.4.0        ✔ tidyverse 1.2.1   </span></a>
 <a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co">#&gt; ✔ stringr   1.4.0        ✔ lattice   0.20.38 </span></a>
 <a class="sourceLine" id="cb1-10" data-line-number="10"><span class="co">#&gt; ✔ dplyr     0.8.0.1      ✔ MASS      7.3.51.3</span></a>
-<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="co">#&gt; ── Conflicts ─────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──</span></a>
+<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="co">#&gt; ── Conflicts ────────────────────────────────────────────── tidyverse_conflicts() ──</span></a>
 <a class="sourceLine" id="cb1-12" data-line-number="12"><span class="co">#&gt; ✖ dplyr::filter() masks stats::filter()</span></a>
 <a class="sourceLine" id="cb1-13" data-line-number="13"><span class="co">#&gt; ✖ dplyr::lag()    masks stats::lag()</span></a>
 <a class="sourceLine" id="cb1-14" data-line-number="14"><span class="co">#&gt; ✖ dplyr::select() masks MASS::select()</span></a></code></pre></div>
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h1>
-<p>La croissance des coraux peut être déterminée à partir de la masse squelettique (obtenu par conversion de la masse immergée <span class="citation">(Jokiel, Maragos, and Franzisket 1978)</span>).</p>
+<p>La croissance des coraux peut être déterminée à partir de la <a href="https://econum.github.io/coral.growth/articles/skeleton_weight_french.html">masse squelettique</a> (obtenu par conversion de la masse immergée <span class="citation">(Jokiel, Maragos, and Franzisket 1978)</span>).</p>
 <p>Sipkema et al. <span class="citation">(2006)</span> ont mis en évidence plusieurs modèles de croissace sur différentes espèces d’éponges. Ces modèles semblent être également valable pour les coraux dont le modèle linéaire ou encore le modèle exponentiel <span class="citation">(Osinga et al. 2011)</span>.</p>
 <p>Le premier modèle est le modèle de croissance linéaire suivant l’équation :</p>
 <p><span class="math display">\[X_t = X_0 + kt\]</span></p>
 <p>avec <span class="math inline">\(X_t\)</span> étant la masse au temps t, <span class="math inline">\(X_0\)</span> la masse initial au temps 0, <span class="math inline">\(k\)</span> la constante de croissance linéaire et <span class="math inline">\(t\)</span> le temps. Si la masse des coraux est monitorée en gramme et le temps en jour, nous aurons une constante exprimé en <span class="math inline">\(g/jour\)</span>. Le taux de croissance peut être obtenu via l’équation suivante :</p>
-<p><span class="math display">\[k =  \frac{X_t - X_0}{t - t_0}\]</span> Il s’agit simplement de la pente de la droite.</p>
+<p><span class="math display">\[k =  \frac{X_t - X_0}{t - t_0}\]</span></p>
+<p>Il s’agit simplement de la pente de la droite. En partant de ce modèle de croissance linéaire, il est également courant de trouver le taux de croissance standardisé par la masse initiale avec la formule suivante :</p>
+<p><span class="math display">\[k =  \frac{\frac{(X_t - X_0)}{X_0}}{t - t_0} \times 100\]</span></p>
+<p>Le taux de croissance sera cette fois ci exprimé <span class="math inline">\(\%/Jour\)</span>.</p>
 <p>Un second modèle est le modèle de croissance exponentielle suivant l’équation suivante :</p>
 <p><span class="math display">\[X_t = X_0 \times e^{bt}\]</span></p>
-<p>avec <span class="math inline">\(X_t\)</span> étant la masse au temps t, <span class="math inline">\(X_0\)</span> la masse initial au temps 0, <span class="math inline">\(b\)</span> la constante de croissance exponentielle et <span class="math inline">\(t\)</span> le temps. Le taux de croissance <span class="math inline">\(b\)</span> peut être obtenu via l’aquation suivante :</p>
+<p>avec <span class="math inline">\(X_t\)</span> étant la masse au temps t, <span class="math inline">\(X_0\)</span> la masse initial au temps 0, <span class="math inline">\(b\)</span> la constante de croissance exponentielle et <span class="math inline">\(t\)</span> le temps. Le taux de croissance <span class="math inline">\(b\)</span> peut être obtenu via l’équation suivante :</p>
 <p><span class="math display">\[ln(X_t) = ln(X_0 \times e^{bt})\\ ln(X_t) = ln(X_0) + bt \\ ln(X_t) - ln(X_0) = bt\\ \frac{ln(X_t) - ln(X_0)}{t}= b \\ \frac{ ln( \frac{X_t}{X_0})}{t} = b\]</span></p>
-<p>Les deux taux de croissance obtenus ne sont de ce fait pas du tout comparable.</p>
-<p>Osinga et son équipe <span class="citation">(2011)</span> émettent l’hypothèse suivante que les espèces branchues vont avoir une développement de type exponentielle alors que les espèce encroutante vont avoir une croissance linéaire.</p>
+<p>Le taux de croissance peut également être exprimé en <span class="math inline">\(\%/Jour\)</span> via l’équation suivante :</p>
+<p><span class="math display">\[\frac{ ln( \frac{X_t}{X_0})}{t} \times 100\]</span></p>
+<p>Les trois taux de croissance obtenus ne sont de ce fait pas du tout comparable.</p>
+<p>Osinga et son équipe <span class="citation">(2011)</span> émettent l’hypothèse que les espèces branchues vont avoir un développement de type exponentiel alors que les espèce encroutante vont avoir une croissance linéaire.</p>
 <p>Partons d’un exemple fictif pour illustrer ces deux situations, avec un organisme de 1 grammes avec un taux de croissance linéaire et exponentiel similaire de 0.1.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">w_ini &lt;-<span class="st"> </span><span class="dv">1</span></a>
 <a class="sourceLine" id="cb2-2" data-line-number="2">coef &lt;-<span class="st"> </span><span class="fl">0.1</span></a>
@@ -136,78 +141,147 @@
 <a class="sourceLine" id="cb2-11" data-line-number="11"><span class="st">  </span>ggplot2<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_path">geom_line</a></span>() <span class="op">+</span></a>
 <a class="sourceLine" id="cb2-12" data-line-number="12"><span class="st">  </span>ggplot2<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/labs">labs</a></span>( <span class="dt">color =</span> <span class="st">"Modèle"</span>)</a></code></pre></div>
 <p><img src="growth_rate_french_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
+<p>Ce graphique démontre que les deux coefficients ne sont pas comparable.</p>
 </div>
-<div id="croissance-exponentielle" class="section level1">
+<div id="fonction" class="section level1">
 <h1 class="hasAnchor">
-<a href="#croissance-exponentielle" class="anchor"></a>Croissance exponentielle</h1>
-<div id="cas-theorique" class="section level2">
+<a href="#fonction" class="anchor"></a>Fonction</h1>
+<p>Le calcul des différents taux de croissance peut être réalisé à l’aide de la fonction suivante :</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">growth_rate &lt;-<span class="st"> </span><span class="cf">function</span>(skw_t, skw_ini, date_t, <span class="dt">date_ini =</span> <span class="dv">0</span>,</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">                        <span class="dt">method =</span> <span class="st">"exponential"</span>) {</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">  <span class="co"># implemented method</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">  met &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"exponential"</span>, <span class="st">"linear"</span>, <span class="st">"linear_std"</span>)</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">  <span class="co"># check method</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">  <span class="cf">if</span>(<span class="op">!</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/any">any</a></span>(met <span class="op">%in%</span><span class="st"> </span>method))</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">    <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/stop">stop</a></span>(<span class="st">"the method is not implemented. see the help page"</span>)</a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11">  <span class="co"># method</span></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12">  <span class="cf">if</span> (method <span class="op">==</span><span class="st"> "exponential"</span>) {</a>
+<a class="sourceLine" id="cb3-13" data-line-number="13">    gr &lt;-<span class="st"> </span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Log">log</a></span>(skw_t<span class="op">/</span>skw_ini)<span class="op">/</span>(date_t <span class="op">-</span><span class="st"> </span>date_ini))<span class="op">*</span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb3-14" data-line-number="14">  } <span class="cf">else</span> <span class="cf">if</span> (method <span class="op">==</span><span class="st"> "linear"</span>) {</a>
+<a class="sourceLine" id="cb3-15" data-line-number="15">    gr &lt;-<span class="st"> </span>(skw_t<span class="op">/</span>skw_ini)<span class="op">/</span>(date_t <span class="op">-</span><span class="st"> </span>date_ini)</a>
+<a class="sourceLine" id="cb3-16" data-line-number="16">  } <span class="cf">else</span> <span class="cf">if</span> (method <span class="op">==</span><span class="st"> "linear_std"</span>) {</a>
+<a class="sourceLine" id="cb3-17" data-line-number="17">    gr &lt;-<span class="st"> </span>(((skw_t<span class="op">/</span>skw_ini)<span class="op">/</span>skw_ini)<span class="op">/</span>(date_t <span class="op">-</span><span class="st"> </span>date_ini))<span class="op">*</span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb3-18" data-line-number="18">  }</a>
+<a class="sourceLine" id="cb3-19" data-line-number="19">  gr</a>
+<a class="sourceLine" id="cb3-20" data-line-number="20">}</a></code></pre></div>
+<p>Cette fonction peut facilement être mis à jour avec de nouvelles formules du taux de croissance. Cette fonction se retrouve au sein du package <code>coral.growth</code></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(coral.growth)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="../reference/growth_rate.html">growth_rate</a></span>(<span class="dt">skw_t =</span> <span class="fl">1.2</span>, <span class="dt">skw_ini =</span> <span class="dv">1</span>, </a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">            <span class="dt">date_t =</span> <span class="dv">7</span>, <span class="dt">date_ini =</span> <span class="dv">0</span>, <span class="dt">method =</span> <span class="st">"exponential"</span>)</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt; [1] 2.604594</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="kw"><a href="../reference/growth_rate.html">growth_rate</a></span>(<span class="dt">skw_t =</span> <span class="fl">1.2</span>, <span class="dt">skw_ini =</span> <span class="dv">1</span>, </a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">            <span class="dt">date_t =</span> <span class="dv">7</span>, <span class="dt">date_ini =</span> <span class="dv">0</span>, <span class="dt">method =</span> <span class="st">"linear"</span>)</a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt; [1] 0.1714286</span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="kw"><a href="../reference/growth_rate.html">growth_rate</a></span>(<span class="dt">skw_t =</span> <span class="fl">1.2</span>, <span class="dt">skw_ini =</span> <span class="dv">1</span>, </a>
+<a class="sourceLine" id="cb5-10" data-line-number="10">            <span class="dt">date_t =</span> <span class="dv">7</span>, <span class="dt">date_ini =</span> <span class="dv">0</span>, <span class="dt">method =</span> <span class="st">"linear_std"</span>)</a>
+<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt; [1] 17.14286</span></a>
+<a class="sourceLine" id="cb5-12" data-line-number="12">            </a>
+<a class="sourceLine" id="cb5-13" data-line-number="13">testthat<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/testthat/topics/output-expectations">expect_error</a></span>(<span class="kw"><a href="../reference/growth_rate.html">growth_rate</a></span>(<span class="dt">skw_t =</span> <span class="fl">1.2</span>, <span class="dt">skw_ini =</span> <span class="dv">1</span>, </a>
+<a class="sourceLine" id="cb5-14" data-line-number="14">                                   <span class="dt">date_t =</span> <span class="dv">7</span>, <span class="dt">date_ini =</span> <span class="dv">0</span>, <span class="dt">method =</span> <span class="st">"expo"</span>))</a></code></pre></div>
+<div id="application-sur-le-jeu-de-donnee-coral_growth" class="section level2">
 <h2 class="hasAnchor">
-<a href="#cas-theorique" class="anchor"></a>Cas théorique</h2>
-</div>
-<div id="application" class="section level2">
-<h2 class="hasAnchor">
-<a href="#application" class="anchor"></a>Application</h2>
-<p>as concret</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(coral.growth)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">cg &lt;-<span class="st"> </span><span class="kw">read</span>(<span class="st">"coral_growth"</span>, <span class="dt">package =</span> <span class="st">"coral.growth"</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">growth_rate &lt;-<span class="st"> </span><span class="cf">function</span>(skw_t, skw_ini, date_t, <span class="dt">date_ini =</span> <span class="dv">0</span>, </a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">                    <span class="dt">method =</span> <span class="st">"exponential"</span>) {</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3">  </a>
-<a class="sourceLine" id="cb4-4" data-line-number="4">  <span class="co"># implemented method</span></a>
-<a class="sourceLine" id="cb4-5" data-line-number="5">  met &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"exponential"</span>, <span class="st">"linear"</span>, <span class="st">"linear_std"</span>)</a>
-<a class="sourceLine" id="cb4-6" data-line-number="6">  <span class="co"># check method</span></a>
-<a class="sourceLine" id="cb4-7" data-line-number="7">  <span class="cf">if</span>(<span class="op">!</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/any">any</a></span>(met <span class="op">%in%</span><span class="st"> </span>method))</a>
-<a class="sourceLine" id="cb4-8" data-line-number="8">    <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/stop">stop</a></span>(<span class="st">"the method is not implemented. see the help page"</span>)</a>
-<a class="sourceLine" id="cb4-9" data-line-number="9">  </a>
-<a class="sourceLine" id="cb4-10" data-line-number="10">  <span class="co"># method</span></a>
-<a class="sourceLine" id="cb4-11" data-line-number="11">  <span class="cf">if</span> (method <span class="op">==</span><span class="st"> "exponential"</span>) { </a>
-<a class="sourceLine" id="cb4-12" data-line-number="12">    g_expo &lt;-<span class="st"> </span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Log">log</a></span>(skw_t<span class="op">/</span>skw_ini)<span class="op">/</span>(date_t <span class="op">-</span><span class="st"> </span>date_ini))<span class="op">*</span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb4-13" data-line-number="13">  } <span class="cf">else</span> <span class="cf">if</span> (method <span class="op">==</span><span class="st"> "linear"</span>) { </a>
-<a class="sourceLine" id="cb4-14" data-line-number="14">    g_lin &lt;-<span class="st"> </span>(skw_t<span class="op">/</span>skw_ini)<span class="op">/</span>(date_t <span class="op">-</span><span class="st"> </span>date_ini)</a>
-<a class="sourceLine" id="cb4-15" data-line-number="15">  } <span class="cf">else</span> <span class="cf">if</span> (method <span class="op">==</span><span class="st"> "linear_std"</span>) {</a>
-<a class="sourceLine" id="cb4-16" data-line-number="16">    g_lin_std &lt;-<span class="st"> </span>(((skw_t<span class="op">/</span>skw_ini)<span class="op">/</span>skw_ini)<span class="op">/</span>(date_t <span class="op">-</span><span class="st"> </span>date_ini))<span class="op">*</span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb4-17" data-line-number="17">  }</a>
-<a class="sourceLine" id="cb4-18" data-line-number="18">}</a></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">cg<span class="op">$</span>skw &lt;-<span class="st"> </span><span class="kw"><a href="../reference/skeleton_weight.html">skeleton_weight</a></span>(<span class="dt">buoyant_weight =</span> cg<span class="op">$</span>weight, <span class="dt">S =</span> cg<span class="op">$</span>salinity, <span class="dt">T =</span> cg<span class="op">$</span>temperature)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3">cg <span class="op">%&gt;.%</span></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/filter">filter</a></span>(., id <span class="op">==</span><span class="st"> "1"</span>) -&gt;<span class="st"> </span>cg</a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb5-6" data-line-number="6">cg <span class="op">%&gt;.%</span></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="st">  </span><span class="kw">mutate</span>(.,</a>
-<a class="sourceLine" id="cb5-8" data-line-number="8">         <span class="dt">skw_lag =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/lag">lag</a></span>(skw),</a>
-<a class="sourceLine" id="cb5-9" data-line-number="9">         <span class="dt">dd_lag =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/lag">lag</a></span>(date),</a>
-<a class="sourceLine" id="cb5-10" data-line-number="10">         <span class="dt">gr =</span> <span class="kw"><a href="../reference/growth_rate.html">growth_rate</a></span>(<span class="dt">skw_t =</span> skw, <span class="dt">skw_ini =</span> skw_lag, </a>
-<a class="sourceLine" id="cb5-11" data-line-number="11">                          <span class="dt">date_t =</span> date, <span class="dt">date_ini =</span> dd_lag, </a>
-<a class="sourceLine" id="cb5-12" data-line-number="12">                          <span class="dt">method =</span> <span class="st">"exponential"</span>),</a>
-<a class="sourceLine" id="cb5-13" data-line-number="13">         <span class="dt">gr1 =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Log">log</a></span>(skw <span class="op">/</span><span class="st"> </span>skw_lag)<span class="op">/</span>(date <span class="op">-</span><span class="st"> </span>dd_lag),</a>
-<a class="sourceLine" id="cb5-14" data-line-number="14">         <span class="dt">gr2 =</span> <span class="kw"><a href="../reference/growth_rate.html">growth_rate</a></span>(<span class="dt">skw_t =</span> skw, <span class="dt">skw_ini =</span> skw_lag, </a>
-<a class="sourceLine" id="cb5-15" data-line-number="15">                       <span class="dt">date_t =</span> date, <span class="dt">date_ini =</span> <span class="dv">0</span>),</a>
-<a class="sourceLine" id="cb5-16" data-line-number="16">         <span class="dt">gg =</span> gr<span class="op">/</span>gr1) -&gt;<span class="st"> </span>cg</a></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">chart</span>(cg, gr <span class="op">~</span><span class="st"> </span>date) <span class="op">+</span></a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>()</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_point).</span></a></code></pre></div>
+<a href="#application-sur-le-jeu-de-donnee-coral_growth" class="anchor"></a>Application sur le jeu de donnée <code>coral_growth</code>
+</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">cg &lt;-<span class="st"> </span>data.io<span class="op">::</span><span class="kw">read</span>(<span class="st">"coral_growth"</span>, <span class="dt">package =</span> <span class="st">"coral.growth"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">cg <span class="op">%&gt;.%</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(., <span class="dt">skw =</span> <span class="kw"><a href="../reference/skeleton_weight.html">skeleton_weight</a></span>(<span class="dt">buoyant_weight =</span> weight, <span class="dt">S =</span> salinity,</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">                                  <span class="dt">T =</span> temperature)) -&gt;<span class="st"> </span>cg</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">cg<span class="op">$</span>skw_log &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Log">log</a></span>(cg<span class="op">$</span>skw)</a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="kw">chart</span>(cg, skw <span class="op">~</span><span class="st"> </span>date <span class="op">%col=%</span><span class="st"> </span>id) <span class="op">+</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="st">  </span><span class="kw">geom_line</span>()</a></code></pre></div>
 <p><img src="growth_rate_french_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">chart</span>(cg, skw <span class="op">~</span><span class="st"> </span>date) <span class="op">+</span></a>
-<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_line</span>()</a></code></pre></div>
-<p><img src="growth_rate_french_files/figure-html/unnamed-chunk-6-2.png" width="700"></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">cg<span class="op">$</span>skw_ini &lt;-<span class="st"> </span><span class="kw">first</span>(cg<span class="op">$</span>skw)</a>
-<a class="sourceLine" id="cb8-2" data-line-number="2">cg<span class="op">$</span>gr_last &lt;-<span class="st"> </span><span class="kw">last</span>(cg<span class="op">$</span>gr)</a>
-<a class="sourceLine" id="cb8-3" data-line-number="3">cg<span class="op">$</span>skw_pred &lt;-<span class="st"> </span>cg<span class="op">$</span>skw_ini <span class="op">*</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Log">exp</a></span>((cg<span class="op">$</span>gr_last<span class="op">/</span><span class="dv">100</span>)<span class="op">*</span>cg<span class="op">$</span>date) </a>
-<a class="sourceLine" id="cb8-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="kw">chart</span>(cg, skw <span class="op">~</span><span class="st"> </span>date) <span class="op">+</span></a>
-<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">f_aes</span>(skw_pred<span class="op">~</span>date), <span class="dt">color =</span> <span class="st">"red"</span>)</a></code></pre></div>
-<p><img src="growth_rate_french_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
+<p>Prennons l’individu <code>5</code> afin de réaliser l’application de notre fonction. Nous souhaitons donc savoir si notre espèce d’intérêt est à une croissance de type exponentiel ou plutot linéaire. Nous allons prendre les valeurs inféreurs à 40 jours pour entrainer notre modèle de croissance et le confronter aux 11 valeurs suivantes.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">cg <span class="op">%&gt;.%</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/filter">filter</a></span>(., id <span class="op">==</span><span class="st"> "5"</span>) -&gt;<span class="st"> </span>cg_red</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">cg_red <span class="op">%&gt;.%</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/filter">filter</a></span>(., date <span class="op">&lt;=</span><span class="st"> </span><span class="dv">40</span>) -&gt;<span class="st"> </span>cg_train</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">chart</span>(cg_train, skw <span class="op">~</span><span class="st"> </span>date) <span class="op">+</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_line</span>() -&gt;<span class="st"> </span>a</a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="kw">chart</span>(cg_train, skw_log <span class="op">~</span><span class="st"> </span>date) <span class="op">+</span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="st">  </span><span class="kw">geom_line</span>() -&gt;<span class="st"> </span>b</a>
+<a class="sourceLine" id="cb9-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb9-9" data-line-number="9"><span class="kw">combine_charts</span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(a,b))</a></code></pre></div>
+<p><img src="growth_rate_french_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">lm1 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/lm">lm</a></span>(<span class="dt">data =</span> cg_train, skw_log <span class="op">~</span><span class="st"> </span>date)</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">coef1 &lt;-<span class="st"> </span>lm1<span class="op">$</span>coefficients[<span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">lm2 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/lm">lm</a></span>(<span class="dt">data =</span> cg_train, skw <span class="op">~</span><span class="st"> </span>date)</a>
+<a class="sourceLine" id="cb10-4" data-line-number="4">coef2 &lt;-<span class="st"> </span>lm2<span class="op">$</span>coefficients[<span class="dv">2</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">dt &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">date =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/seq">seq</a></span>(<span class="dt">from =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Extremes">min</a></span>(cg_red<span class="op">$</span>date), <span class="dt">to =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Extremes">max</a></span>(cg_red<span class="op">$</span>date) <span class="op">+</span><span class="st"> </span><span class="dv">20</span>))</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">dt<span class="op">$</span>y &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Extremes">min</a></span>(cg_red<span class="op">$</span>skw) <span class="op">*</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Log">exp</a></span>(coef1<span class="op">*</span>dt<span class="op">$</span>date)</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">dt<span class="op">$</span>y1 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Extremes">min</a></span>(cg_red<span class="op">$</span>skw) <span class="op">+</span><span class="st"> </span>coef2<span class="op">*</span>dt<span class="op">$</span>date</a>
+<a class="sourceLine" id="cb11-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="kw">chart</span>(cg_red, skw <span class="op">~</span><span class="st"> </span>date) <span class="op">+</span></a>
+<a class="sourceLine" id="cb11-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb11-7" data-line-number="7"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">f_aes</span>(y <span class="op">~</span><span class="st"> </span>date), <span class="dt">data =</span> dt) <span class="op">+</span></a>
+<a class="sourceLine" id="cb11-8" data-line-number="8"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">f_aes</span>(y1 <span class="op">~</span><span class="st"> </span>date), <span class="dt">data =</span> dt, <span class="dt">color =</span> <span class="st">"red"</span>)</a></code></pre></div>
+<p><img src="growth_rate_french_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
+</div>
+<div id="application-sur-le-jeu-de-donnee-coral_growth1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#application-sur-le-jeu-de-donnee-coral_growth1" class="anchor"></a>Application sur le jeu de donnée <code>coral_growth1</code>
+</h2>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">cg &lt;-<span class="st"> </span>data.io<span class="op">::</span><span class="kw">read</span>(<span class="st">"coral_growth1"</span>, <span class="dt">package =</span> <span class="st">"coral.growth"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">cg <span class="op">%&gt;.%</span></a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(., <span class="dt">skw =</span> <span class="kw"><a href="../reference/skeleton_weight.html">skeleton_weight</a></span>(<span class="dt">buoyant_weight =</span> weight, <span class="dt">S =</span> salinity,</a>
+<a class="sourceLine" id="cb13-3" data-line-number="3">                                  <span class="dt">T =</span> temperature)) -&gt;<span class="st"> </span>cg</a>
+<a class="sourceLine" id="cb13-4" data-line-number="4">cg<span class="op">$</span>skw_log &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Log">log</a></span>(cg<span class="op">$</span>skw)</a>
+<a class="sourceLine" id="cb13-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb13-6" data-line-number="6"><span class="kw">chart</span>(cg, skw <span class="op">~</span><span class="st"> </span>date <span class="op">%col=%</span><span class="st"> </span>id) <span class="op">+</span></a>
+<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb13-8" data-line-number="8"><span class="st">  </span><span class="kw">geom_line</span>()</a>
+<a class="sourceLine" id="cb13-9" data-line-number="9"><span class="co">#&gt; Warning: Removed 3 rows containing missing values (geom_point).</span></a>
+<a class="sourceLine" id="cb13-10" data-line-number="10"><span class="co">#&gt; Warning: Removed 2 rows containing missing values (geom_path).</span></a></code></pre></div>
+<p><img src="growth_rate_french_files/figure-html/unnamed-chunk-12-1.png" width="700"></p>
+<p>Prennons l’individu <code>5</code> afin de réaliser l’application de notre fonction. Nous souhaitons donc savoir si notre espèce d’intérêt est à une croissance de type exponentiel ou plutot linéaire. Nous allons prendre les valeurs inféreurs à 40 jours pour entrainer notre modèle de croissance et le confronter aux 11 valeurs suivantes.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">cg <span class="op">%&gt;.%</span></a>
+<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/filter">filter</a></span>(., id <span class="op">==</span><span class="st"> "83"</span>) -&gt;<span class="st"> </span>cg_red</a>
+<a class="sourceLine" id="cb14-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb14-4" data-line-number="4">cg_red <span class="op">%&gt;.%</span></a>
+<a class="sourceLine" id="cb14-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/filter">filter</a></span>(., date <span class="op">&lt;=</span><span class="st"> </span><span class="dv">50</span>) -&gt;<span class="st"> </span>cg_train</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">chart</span>(cg_train, skw <span class="op">~</span><span class="st"> </span>date) <span class="op">+</span></a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_line</span>() -&gt;<span class="st"> </span>a</a>
+<a class="sourceLine" id="cb15-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb15-5" data-line-number="5"><span class="kw">chart</span>(cg_train, skw_log <span class="op">~</span><span class="st"> </span>date) <span class="op">+</span></a>
+<a class="sourceLine" id="cb15-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb15-7" data-line-number="7"><span class="st">  </span><span class="kw">geom_line</span>() -&gt;<span class="st"> </span>b</a>
+<a class="sourceLine" id="cb15-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb15-9" data-line-number="9"><span class="kw">combine_charts</span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(a,b))</a>
+<a class="sourceLine" id="cb15-10" data-line-number="10"><span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_point).</span></a>
+<a class="sourceLine" id="cb15-11" data-line-number="11"><span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_path).</span></a>
+<a class="sourceLine" id="cb15-12" data-line-number="12"><span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_point).</span></a>
+<a class="sourceLine" id="cb15-13" data-line-number="13"><span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_path).</span></a></code></pre></div>
+<p><img src="growth_rate_french_files/figure-html/unnamed-chunk-14-1.png" width="700"></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">lm1 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/lm">lm</a></span>(<span class="dt">data =</span> cg_train, skw_log <span class="op">~</span><span class="st"> </span>date)</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2">coef1 &lt;-<span class="st"> </span>lm1<span class="op">$</span>coefficients[<span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb16-3" data-line-number="3">lm2 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/lm">lm</a></span>(<span class="dt">data =</span> cg_train, skw <span class="op">~</span><span class="st"> </span>date)</a>
+<a class="sourceLine" id="cb16-4" data-line-number="4">coef2 &lt;-<span class="st"> </span>lm2<span class="op">$</span>coefficients[<span class="dv">2</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">dt &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">date =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/seq">seq</a></span>(<span class="dt">from =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Extremes">min</a></span>(cg_red<span class="op">$</span>date), <span class="dt">to =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Extremes">max</a></span>(cg_red<span class="op">$</span>date) <span class="op">+</span><span class="st"> </span><span class="dv">20</span>))</a>
+<a class="sourceLine" id="cb17-2" data-line-number="2">dt<span class="op">$</span>y &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Extremes">min</a></span>(cg_red<span class="op">$</span>skw, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">*</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Log">exp</a></span>(coef1<span class="op">*</span>dt<span class="op">$</span>date)</a>
+<a class="sourceLine" id="cb17-3" data-line-number="3">dt<span class="op">$</span>y1 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Extremes">min</a></span>(cg_red<span class="op">$</span>skw, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st"> </span>coef2<span class="op">*</span>dt<span class="op">$</span>date</a>
+<a class="sourceLine" id="cb17-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb17-5" data-line-number="5"><span class="kw">chart</span>(cg_red, skw <span class="op">~</span><span class="st"> </span>date) <span class="op">+</span></a>
+<a class="sourceLine" id="cb17-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb17-7" data-line-number="7"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">f_aes</span>(y <span class="op">~</span><span class="st"> </span>date), <span class="dt">data =</span> dt) <span class="op">+</span></a>
+<a class="sourceLine" id="cb17-8" data-line-number="8"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">f_aes</span>(y1 <span class="op">~</span><span class="st"> </span>date), <span class="dt">data =</span> dt, <span class="dt">color =</span> <span class="st">"red"</span>)</a>
+<a class="sourceLine" id="cb17-9" data-line-number="9"><span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_point).</span></a></code></pre></div>
+<p><img src="growth_rate_french_files/figure-html/unnamed-chunk-16-1.png" width="700"></p>
 </div>
 </div>
 <div id="bibliographie" class="section level1 unnumbered">
 <h1 class="hasAnchor">
-<a href="#bibliographie" class="anchor"></a>bibliographie</h1>
+<a href="#bibliographie" class="anchor"></a>Bibliographie</h1>
 <div id="refs" class="references">
 <div id="ref-Jokiel1978">
 <p>Jokiel, Paul L., JE Maragos, and L Franzisket. 1978. “Coral growth: buoyant weight technique.” In <em>Coral Reefs: Research Methods</em>, edited by Bernan Associates, 541. October. UNESCO.</p>
@@ -229,12 +303,12 @@
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#introduction">Introduction</a></li>
       <li>
-<a href="#croissance-exponentielle">Croissance exponentielle</a><ul class="nav nav-pills nav-stacked">
-<li><a href="#cas-theorique">Cas théorique</a></li>
-      <li><a href="#application">Application</a></li>
+<a href="#fonction">Fonction</a><ul class="nav nav-pills nav-stacked">
+<li><a href="#application-sur-le-jeu-de-donnee-coral_growth">Application sur le jeu de donnée <code>coral_growth</code></a></li>
+      <li><a href="#application-sur-le-jeu-de-donnee-coral_growth1">Application sur le jeu de donnée <code>coral_growth1</code></a></li>
       </ul>
 </li>
-      <li><a href="#bibliographie">bibliographie</a></li>
+      <li><a href="#bibliographie">Bibliographie</a></li>
       </ul>
 </div>
       </div>

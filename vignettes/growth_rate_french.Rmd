@@ -16,7 +16,7 @@ SciViews::R
 
 # Introduction
 
-La croissance des coraux peut être déterminée à partir de la masse squelettique (obtenu par conversion de la masse immergée [@Jokiel1978]).
+La croissance des coraux peut être déterminée à partir de la [masse squelettique](https://econum.github.io/coral.growth/articles/skeleton_weight_french.html) (obtenu par conversion de la masse immergée [@Jokiel1978]).
 
 Sipkema et al. [-@Sipkema2006] ont mis en évidence plusieurs modèles de croissace sur différentes espèces d'éponges. Ces modèles semblent être également valable pour les coraux dont le modèle linéaire ou encore le modèle exponentiel [@Osinga2011].
 
@@ -27,19 +27,28 @@ $$X_t = X_0 + kt$$
 avec $X_t$ étant la masse au temps t, $X_0$ la masse initial au temps 0, $k$ la constante de croissance linéaire et $t$ le temps. Si la masse des coraux est monitorée en gramme et le temps en jour, nous aurons une constante exprimé en $g/jour$. Le taux de croissance peut être obtenu via l'équation suivante :
 
 $$k =  \frac{X_t - X_0}{t - t_0}$$
-Il s'agit simplement de la pente de la droite.
+
+Il s'agit simplement de la pente de la droite. En partant de ce modèle de croissance linéaire, il est également courant de trouver le taux de croissance standardisé par la masse initiale avec la formule suivante :
+
+$$k =  \frac{\frac{(X_t - X_0)}{X_0}}{t - t_0} \times 100$$
+
+Le taux de croissance sera cette fois ci exprimé $\%/Jour$.
 
 Un second modèle est le modèle de croissance exponentielle suivant l'équation suivante : 
 
 $$X_t = X_0 \times e^{bt}$$
 
-avec $X_t$ étant la masse au temps t, $X_0$ la masse initial au temps 0, $b$ la constante de croissance exponentielle et $t$ le temps. Le taux de croissance $b$ peut être obtenu via l'aquation suivante :
+avec $X_t$ étant la masse au temps t, $X_0$ la masse initial au temps 0, $b$ la constante de croissance exponentielle et $t$ le temps. Le taux de croissance $b$ peut être obtenu via l'équation suivante :
 
 $$ln(X_t) = ln(X_0 \times e^{bt})\\ ln(X_t) = ln(X_0) + bt \\ ln(X_t) - ln(X_0) = bt\\ \frac{ln(X_t) - ln(X_0)}{t}= b \\ \frac{ ln( \frac{X_t}{X_0})}{t} = b$$
 
-Les deux taux de croissance obtenus ne sont de ce fait pas du tout comparable.
+Le taux de croissance peut également être exprimé en $\%/Jour$ via l'équation suivante :
 
-Osinga et son équipe [-@Osinga2011] émettent l'hypothèse suivante que les espèces branchues vont avoir une développement de type exponentielle alors que les espèce encroutante vont avoir une croissance linéaire.
+$$\frac{ ln( \frac{X_t}{X_0})}{t} \times 100$$
+
+Les trois taux de croissance obtenus ne sont de ce fait pas du tout comparable.
+
+Osinga et son équipe [-@Osinga2011] émettent l'hypothèse que les espèces branchues vont avoir un développement de type exponentiel alors que les espèce encroutante vont avoir une croissance linéaire.
 
 Partons d'un exemple fictif pour illustrer ces deux situations, avec un organisme de 1 grammes avec un taux de croissance linéaire et exponentiel similaire de 0.1.
 
@@ -58,84 +67,175 @@ chart::chart(example, masse~temps %col=% mod) +
   ggplot2::labs( color = "Modèle")
 ```
 
-# Croissance exponentielle 
+Ce graphique démontre que les deux coefficients ne sont pas comparable. 
 
-## Cas théorique 
+# Fonction
 
-## Application
+Le calcul des différents taux de croissance peut être réalisé à l'aide de la fonction suivante : 
 
-as concret
+```{r function, eval=F}
+growth_rate <- function(skw_t, skw_ini, date_t, date_ini = 0,
+                        method = "exponential") {
 
-```{r}
-library(coral.growth)
-cg <- read("coral_growth", package = "coral.growth")
-```
-
-
-```{r}
-growth_rate <- function(skw_t, skw_ini, date_t, date_ini = 0, 
-                    method = "exponential") {
-  
   # implemented method
   met <- c("exponential", "linear", "linear_std")
+
   # check method
   if(!any(met %in% method))
     stop("the method is not implemented. see the help page")
-  
+
   # method
-  if (method == "exponential") { 
-    g_expo <- (log(skw_t/skw_ini)/(date_t - date_ini))*100
-  } else if (method == "linear") { 
-    g_lin <- (skw_t/skw_ini)/(date_t - date_ini)
+  if (method == "exponential") {
+    gr <- (log(skw_t/skw_ini)/(date_t - date_ini))*100
+  } else if (method == "linear") {
+    gr <- (skw_t/skw_ini)/(date_t - date_ini)
   } else if (method == "linear_std") {
-    g_lin_std <- (((skw_t/skw_ini)/skw_ini)/(date_t - date_ini))*100
+    gr <- (((skw_t/skw_ini)/skw_ini)/(date_t - date_ini))*100
   }
+  gr
 }
 ```
 
+Cette fonction peut facilement être mis à jour avec de nouvelles formules du taux de croissance. Cette fonction se retrouve au sein du package `coral.growth`
 
 ```{r}
-cg$skw <- skeleton_weight(buoyant_weight = cg$weight, S = cg$salinity, T = cg$temperature)
+library(coral.growth)
+```
 
-cg %>.%
-  filter(., id == "1") -> cg
+```{r}
+growth_rate(skw_t = 1.2, skw_ini = 1, 
+            date_t = 7, date_ini = 0, method = "exponential")
 
-cg %>.%
-  mutate(.,
-         skw_lag = lag(skw),
-         dd_lag = lag(date),
-         gr = growth_rate(skw_t = skw, skw_ini = skw_lag, 
-                          date_t = date, date_ini = dd_lag, 
-                          method = "exponential"),
-         gr1 = log(skw / skw_lag)/(date - dd_lag),
-         gr2 = growth_rate(skw_t = skw, skw_ini = skw_lag, 
-                       date_t = date, date_ini = 0),
-         gg = gr/gr1) -> cg
+growth_rate(skw_t = 1.2, skw_ini = 1, 
+            date_t = 7, date_ini = 0, method = "linear")
+
+growth_rate(skw_t = 1.2, skw_ini = 1, 
+            date_t = 7, date_ini = 0, method = "linear_std")
+            
+testthat::expect_error(growth_rate(skw_t = 1.2, skw_ini = 1, 
+                                   date_t = 7, date_ini = 0, method = "expo"))
+```
+
+
+## Application sur le jeu de donnée `coral_growth`
+
+```{r}
+cg <- data.io::read("coral_growth", package = "coral.growth")
 ```
 
 
 ```{r}
-chart(cg, gr ~ date) +
-  geom_point()
+cg %>.%
+  mutate(., skw = skeleton_weight(buoyant_weight = weight, S = salinity,
+                                  T = temperature)) -> cg
+cg$skw_log <- log(cg$skw)
 
-chart(cg, skw ~ date) +
+chart(cg, skw ~ date %col=% id) +
   geom_point() +
   geom_line()
 ```
 
+Prennons l'individu `5` afin de réaliser l'application de notre fonction. Nous souhaitons donc savoir si notre espèce d'intérêt est à une croissance de type exponentiel ou plutot  linéaire. Nous allons prendre les valeurs inféreurs à 40 jours pour entrainer notre modèle de croissance et le confronter aux 11 valeurs suivantes.
+
 ```{r}
-cg$skw_ini <- first(cg$skw)
-cg$gr_last <- last(cg$gr)
-cg$skw_pred <- cg$skw_ini * exp((cg$gr_last/100)*cg$date) 
+cg %>.%
+  filter(., id == "5") -> cg_red
 
-
-chart(cg, skw ~ date) +
-  geom_point() +
-  geom_line() +
-  geom_line(f_aes(skw_pred~date), color = "red")
-
-
+cg_red %>.%
+  filter(., date <= 40) -> cg_train
 ```
 
 
-# bibliographie
+```{r}
+chart(cg_train, skw ~ date) +
+  geom_point() +
+  geom_line() -> a
+
+chart(cg_train, skw_log ~ date) +
+  geom_point() +
+  geom_line() -> b
+
+combine_charts(list(a,b))
+```
+
+
+```{r}
+lm1 <- lm(data = cg_train, skw_log ~ date)
+coef1 <- lm1$coefficients[2]
+lm2 <- lm(data = cg_train, skw ~ date)
+coef2 <- lm2$coefficients[2]
+```
+
+```{r}
+dt <- tibble(date = seq(from = min(cg_red$date), to = max(cg_red$date) + 20))
+dt$y <- min(cg_red$skw) * exp(coef1*dt$date)
+dt$y1 <- min(cg_red$skw) + coef2*dt$date
+
+chart(cg_red, skw ~ date) +
+  geom_point() +
+  geom_line(f_aes(y ~ date), data = dt) +
+  geom_line(f_aes(y1 ~ date), data = dt, color = "red")
+```
+
+## Application sur le jeu de donnée `coral_growth1`
+
+```{r}
+cg <- data.io::read("coral_growth1", package = "coral.growth")
+```
+
+
+```{r}
+cg %>.%
+  mutate(., skw = skeleton_weight(buoyant_weight = weight, S = salinity,
+                                  T = temperature)) -> cg
+cg$skw_log <- log(cg$skw)
+
+chart(cg, skw ~ date %col=% id) +
+  geom_point() +
+  geom_line()
+```
+
+Prennons l'individu `5` afin de réaliser l'application de notre fonction. Nous souhaitons donc savoir si notre espèce d'intérêt est à une croissance de type exponentiel ou plutot  linéaire. Nous allons prendre les valeurs inféreurs à 40 jours pour entrainer notre modèle de croissance et le confronter aux 11 valeurs suivantes.
+
+```{r}
+cg %>.%
+  filter(., id == "83") -> cg_red
+
+cg_red %>.%
+  filter(., date <= 50) -> cg_train
+```
+
+
+```{r}
+chart(cg_train, skw ~ date) +
+  geom_point() +
+  geom_line() -> a
+
+chart(cg_train, skw_log ~ date) +
+  geom_point() +
+  geom_line() -> b
+
+combine_charts(list(a,b))
+```
+
+
+```{r}
+lm1 <- lm(data = cg_train, skw_log ~ date)
+coef1 <- lm1$coefficients[2]
+lm2 <- lm(data = cg_train, skw ~ date)
+coef2 <- lm2$coefficients[2]
+```
+
+```{r}
+dt <- tibble(date = seq(from = min(cg_red$date), to = max(cg_red$date) + 20))
+dt$y <- min(cg_red$skw, na.rm = TRUE) * exp(coef1*dt$date)
+dt$y1 <- min(cg_red$skw, na.rm = TRUE) + coef2*dt$date
+
+chart(cg_red, skw ~ date) +
+  geom_point() +
+  geom_line(f_aes(y ~ date), data = dt) +
+  geom_line(f_aes(y1 ~ date), data = dt, color = "red")
+```
+
+
+# Bibliographie

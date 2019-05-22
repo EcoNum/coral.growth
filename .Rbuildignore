@@ -15,3 +15,5 @@
 ^data-raw$
 ^appveyor\.yml$
 ^codecov\.yml$
+^vignettes/skeleton_weight\.Rmd$
+^vignettes/growth_rate\.Rmd$
