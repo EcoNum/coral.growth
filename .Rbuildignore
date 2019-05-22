@@ -13,3 +13,4 @@
 ^vignettes/growth_rate_french\.Rmd$
 ^\.travis\.yml$
 ^data-raw$
+^appveyor\.yml$
