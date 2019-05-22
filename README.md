@@ -10,15 +10,15 @@
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![License:
-CC0-1.0](https://licensebuttons.net/l/zero/1.0/80x15.png)](http://creativecommons.org/publicdomain/zero/1.0/)
+MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Travis build
 status](https://travis-ci.org/EcoNum/coral.growth.svg?branch=master)](https://travis-ci.org/EcoNum/coral.growth)
-[![CRAN
-status](https://www.r-pkg.org/badges/version/coral.growth)](https://cran.r-project.org/package=coral.growth)
 [![AppVeyor build
 status](https://ci.appveyor.com/api/projects/status/github/EcoNum/coral.growth?branch=master&svg=true)](https://ci.appveyor.com/project/EcoNum/coral.growth)
 [![Codecov test
 coverage](https://codecov.io/gh/EcoNum/coral.growth/branch/master/graph/badge.svg)](https://codecov.io/gh/EcoNum/coral.growth?branch=master)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/coral.growth)](https://cran.r-project.org/package=coral.growth)
 <!-- badges: end -->
 
 Coral reefs are considered one of the most biodiverse marine ecosystems
