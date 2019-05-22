@@ -17,6 +17,8 @@ status](https://travis-ci.org/EcoNum/coral.growth.svg?branch=master)](https://tr
 status](https://www.r-pkg.org/badges/version/coral.growth)](https://cran.r-project.org/package=coral.growth)
 [![AppVeyor build
 status](https://ci.appveyor.com/api/projects/status/github/EcoNum/coral.growth?branch=master&svg=true)](https://ci.appveyor.com/project/EcoNum/coral.growth)
+[![Codecov test
+coverage](https://codecov.io/gh/EcoNum/coral.growth/branch/master/graph/badge.svg)](https://codecov.io/gh/EcoNum/coral.growth?branch=master)
 <!-- badges: end -->
 
 Coral reefs are considered one of the most biodiverse marine ecosystems

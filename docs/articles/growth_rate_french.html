@@ -94,7 +94,7 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">SciViews<span class="op">::</span>R</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="co">#&gt; ── Attaching packages ────────────────────────────────────────── SciViews::R 1.1.0 ──</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="co">#&gt; ── Attaching packages ────────────────────────────────────────────────────────────────────────── SciViews::R 1.1.0 ──</span></a>
 <a class="sourceLine" id="cb1-3" data-line-number="3"><span class="co">#&gt; ✔ SciViews  1.1.0        ✔ purrr     0.3.2   </span></a>
 <a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co">#&gt; ✔ chart     1.3.0        ✔ readr     1.3.1   </span></a>
 <a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co">#&gt; ✔ flow      1.0.0        ✔ tidyr     0.8.3   </span></a>
@@ -103,7 +103,7 @@
 <a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co">#&gt; ✔ forcats   0.4.0        ✔ tidyverse 1.2.1   </span></a>
 <a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co">#&gt; ✔ stringr   1.4.0        ✔ lattice   0.20.38 </span></a>
 <a class="sourceLine" id="cb1-10" data-line-number="10"><span class="co">#&gt; ✔ dplyr     0.8.0.1      ✔ MASS      7.3.51.3</span></a>
-<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="co">#&gt; ── Conflicts ─────────────────────────────────────────────── tidyverse_conflicts() ──</span></a>
+<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="co">#&gt; ── Conflicts ─────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──</span></a>
 <a class="sourceLine" id="cb1-12" data-line-number="12"><span class="co">#&gt; ✖ dplyr::filter() masks stats::filter()</span></a>
 <a class="sourceLine" id="cb1-13" data-line-number="13"><span class="co">#&gt; ✖ dplyr::lag()    masks stats::lag()</span></a>
 <a class="sourceLine" id="cb1-14" data-line-number="14"><span class="co">#&gt; ✖ dplyr::select() masks MASS::select()</span></a></code></pre></div>
@@ -182,8 +182,27 @@
 <a class="sourceLine" id="cb5-12" data-line-number="12">                          <span class="dt">method =</span> <span class="st">"exponential"</span>),</a>
 <a class="sourceLine" id="cb5-13" data-line-number="13">         <span class="dt">gr1 =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Log">log</a></span>(skw <span class="op">/</span><span class="st"> </span>skw_lag)<span class="op">/</span>(date <span class="op">-</span><span class="st"> </span>dd_lag),</a>
 <a class="sourceLine" id="cb5-14" data-line-number="14">         <span class="dt">gr2 =</span> <span class="kw"><a href="../reference/growth_rate.html">growth_rate</a></span>(<span class="dt">skw_t =</span> skw, <span class="dt">skw_ini =</span> skw_lag, </a>
-<a class="sourceLine" id="cb5-15" data-line-number="15">                       <span class="dt">date_t =</span> date, <span class="dt">date_ini =</span> dd_lag),</a>
+<a class="sourceLine" id="cb5-15" data-line-number="15">                       <span class="dt">date_t =</span> date, <span class="dt">date_ini =</span> <span class="dv">0</span>),</a>
 <a class="sourceLine" id="cb5-16" data-line-number="16">         <span class="dt">gg =</span> gr<span class="op">/</span>gr1) -&gt;<span class="st"> </span>cg</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">chart</span>(cg, gr <span class="op">~</span><span class="st"> </span>date) <span class="op">+</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>()</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_point).</span></a></code></pre></div>
+<p><img src="growth_rate_french_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">chart</span>(cg, skw <span class="op">~</span><span class="st"> </span>date) <span class="op">+</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_line</span>()</a></code></pre></div>
+<p><img src="growth_rate_french_files/figure-html/unnamed-chunk-6-2.png" width="700"></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">cg<span class="op">$</span>skw_ini &lt;-<span class="st"> </span><span class="kw">first</span>(cg<span class="op">$</span>skw)</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">cg<span class="op">$</span>gr_last &lt;-<span class="st"> </span><span class="kw">last</span>(cg<span class="op">$</span>gr)</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">cg<span class="op">$</span>skw_pred &lt;-<span class="st"> </span>cg<span class="op">$</span>skw_ini <span class="op">*</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Log">exp</a></span>((cg<span class="op">$</span>gr_last<span class="op">/</span><span class="dv">100</span>)<span class="op">*</span>cg<span class="op">$</span>date) </a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="kw">chart</span>(cg, skw <span class="op">~</span><span class="st"> </span>date) <span class="op">+</span></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">f_aes</span>(skw_pred<span class="op">~</span>date), <span class="dt">color =</span> <span class="st">"red"</span>)</a></code></pre></div>
+<p><img src="growth_rate_french_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 </div>
 </div>
 <div id="bibliographie" class="section level1 unnumbered">
