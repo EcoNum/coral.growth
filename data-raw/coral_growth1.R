@@ -18,7 +18,6 @@ readr::read_csv(coral_url,
          date = (as.numeric(difftime(date, date[1], units = "days")))) %>.%
   select(., -project, -author, -aqua, -condition, -status, -comment) -> t
 
-
 # reshape data
 t <- t[, c("id", "species", "date", "weight",
                                    "salinity", "temperature")]

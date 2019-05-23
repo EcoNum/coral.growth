@@ -16,7 +16,7 @@ SciViews::R
 
 # Introduction
 
-La croissance des coraux peut être déterminée à partir de la [masse squelettique](https://econum.github.io/coral.growth/articles/skeleton_weight_french.html) (obtenu par conversion de la masse immergée [@Jokiel1978]).
+La croissance des coraux peut être déterminée à partir de la [masse squelettique](https://econum.github.io/coral.growth/articles/skeleton_weight_french.html) (obtenue par conversion de la masse immergée [@Jokiel1978]).
 
 Sipkema et al. [-@Sipkema2006] ont mis en évidence plusieurs modèles de croissace sur différentes espèces d'éponges. Ces modèles semblent être également valable pour les coraux dont le modèle linéaire ou encore le modèle exponentiel [@Osinga2011].
 
@@ -116,126 +116,133 @@ testthat::expect_error(growth_rate(skw_t = 1.2, skw_ini = 1,
                                    date_t = 7, date_ini = 0, method = "expo"))
 ```
 
+# But
 
-## Application sur le jeu de donnée `coral_growth`
+- Quel est le type de croissance le plus adapté pour des boutures de *Seriatopora hystrix*. 
+- Est il plus intéressant de déterminer le taux de croissance entre deux points de messures succésifs ou bien depuis la première mesure de la bouture.
+
+# Application sur le jeu de donnée `coral_growth`
 
 ```{r}
 cg <- data.io::read("coral_growth", package = "coral.growth")
 ```
 
+## Description du mode opératoire
+
+`r length(levels(cg$id))` boutures de *Seriatopora hystrix* ont été monitoré durant une période de `r round(max(cg$date, na.rm = TRUE), 1)` jours. La masse squelettique est obtenue via la masse immergée. 
 
 ```{r}
 cg %>.%
-  mutate(., skw = skeleton_weight(buoyant_weight = weight, S = salinity,
-                                  T = temperature)) -> cg
-cg$skw_log <- log(cg$skw)
+  mutate(., 
+         skw = skeleton_weight(buoyant_weight = weight, S = salinity,
+                                  T = temperature),
+         skw_log = log(skw)) -> cg
 
 chart(cg, skw ~ date %col=% id) +
   geom_point() +
-  geom_line()
+  geom_line() +
+  labs(y = "Masse squelettique [g]", x = "Temps [J]")
 ```
 
-Prennons l'individu `5` afin de réaliser l'application de notre fonction. Nous souhaitons donc savoir si notre espèce d'intérêt est à une croissance de type exponentiel ou plutot  linéaire. Nous allons prendre les valeurs inféreurs à 40 jours pour entrainer notre modèle de croissance et le confronter aux 11 valeurs suivantes.
+## Croissance exponentielle ou linéaire 
 
 ```{r}
+
+id_select <- "5"
+date_select <- 40
+
 cg %>.%
-  filter(., id == "5") -> cg_red
+  filter(., id == id_select) -> cg_red
 
 cg_red %>.%
-  filter(., date <= 40) -> cg_train
+  filter(., date <= date_select) -> cg_train
 ```
 
+Prennons l'individu `r unique(cg_red$id)` afin d'étudier le croissance de cet organisme. Sa masse squelettique varie entre `r round(min(cg_red$skw, na.rm = TRUE),2)` et `r round(max(cg_red$skw, na.rm = TRUE),2)`. Un jeu de données d'apprentissage va être réalisée contenant 2/3 des premières observations de croissance. Les observations supplémentaires vont être employées afin de valider les modèles.
+
+Si la croissance suit un modèle exponentiel il est possible de linéariser les observations avec la transformation mathématique logarithmique 
 
 ```{r}
 chart(cg_train, skw ~ date) +
   geom_point() +
-  geom_line() -> a
+  geom_line() +
+  labs(y = "Masse squelettique [g]", x = "Temps [J]") -> a
 
 chart(cg_train, skw_log ~ date) +
   geom_point() +
-  geom_line() -> b
+  geom_line() +
+  labs(y = "Logarithme de la asse squelettique", x = "Temps [J]") -> b
 
 combine_charts(list(a,b))
 ```
 
-
 ```{r}
-lm1 <- lm(data = cg_train, skw_log ~ date)
+lm1 <- lm(data = cg_train, skw ~ date)
 coef1 <- lm1$coefficients[2]
-lm2 <- lm(data = cg_train, skw ~ date)
+
+lm2 <- lm(data = cg_train, skw_log ~ date)
 coef2 <- lm2$coefficients[2]
 ```
 
+Le taux de croissance pour le modèle exponentielle est de `r round(coef1, 2)` $g/J$ alors qu'il est de `r round(coef2*100, 2)` $%/J$
+
 ```{r}
 dt <- tibble(date = seq(from = min(cg_red$date), to = max(cg_red$date) + 20))
-dt$y <- min(cg_red$skw) * exp(coef1*dt$date)
-dt$y1 <- min(cg_red$skw) + coef2*dt$date
+dt$y <- min(cg_red$skw) + coef1*dt$date
+dt$y1 <- min(cg_red$skw) * exp(coef2*dt$date)
+
 
 chart(cg_red, skw ~ date) +
   geom_point() +
   geom_line(f_aes(y ~ date), data = dt) +
-  geom_line(f_aes(y1 ~ date), data = dt, color = "red")
+  geom_line(f_aes(y1 ~ date), data = dt, color = "red") +
+  geom_vline(xintercept = date_select, linetype = "dashed", color = "blue") +
+  geom_label(aes(x = date_select/2, y = max(cg$skw)*1.10, label = "Set d'apprentissage")) +
+  geom_label(aes(x = date_select + date_select/2, y = max(cg$skw)*1.10, label = "Set de test")) +
+  labs(y = "Masse squelettique [g]", x = "Temps [J]")
+  
 ```
 
-## Application sur le jeu de donnée `coral_growth1`
+Il semble que la croissance pour des boutures de masses comprises entre `r round(min(cg_red$skw, na.rm = TRUE),2)` et `r round(max(cg_red$skw, na.rm = TRUE),2)` tend à être exponentielle et non linéaire. 
+
+La croissance exponentielle ne respecte pas parfaitement la croissance de la bouture sélectionnée (bouture : `r unique(cg_red$id)`)
+
+## Taux de croissance variable ou constant au cours du temps
+
+Le point initial servant de référence pour déterminer le taux de croissance doit il etre le point initiale des mesures ou bien la mesure précédente. Deux possibilités sont envisagées et exprimées via les deux équations ci-dessous.
+
+- équation en partant du point de croissance initiale (courbe noire):
+
+$$\frac{ ln( \frac{X_t}{X_0})}{t - t_0} \times 100$$
+
+- équation en partant du point de croissance précédent (courbe rouge):
+
+$$\frac{ ln( \frac{X_t}{X_{t-1}})}{t - t_{t-1}} \times 100$$
 
 ```{r}
-cg <- data.io::read("coral_growth1", package = "coral.growth")
-```
-
-
-```{r}
-cg %>.%
-  mutate(., skw = skeleton_weight(buoyant_weight = weight, S = salinity,
-                                  T = temperature)) -> cg
-cg$skw_log <- log(cg$skw)
-
-chart(cg, skw ~ date %col=% id) +
-  geom_point() +
-  geom_line()
-```
-
-Prennons l'individu `5` afin de réaliser l'application de notre fonction. Nous souhaitons donc savoir si notre espèce d'intérêt est à une croissance de type exponentiel ou plutot  linéaire. Nous allons prendre les valeurs inféreurs à 40 jours pour entrainer notre modèle de croissance et le confronter aux 11 valeurs suivantes.
-
-```{r}
-cg %>.%
-  filter(., id == "83") -> cg_red
-
 cg_red %>.%
-  filter(., date <= 50) -> cg_train
+  mutate(., 
+         skw_ini = first(skw),
+         skw_ini1 = lag(skw),
+         date_ini1 = lag(date),
+         gr = growth_rate(skw_t = skw, skw_ini = skw_ini, 
+                     date_t = date,date_ini = 0, 
+                     method = "exponential"),
+         gr1 = growth_rate(skw_t = skw, skw_ini = skw_ini1, 
+                     date_t = date,date_ini = date_ini1, 
+                     method = "exponential")) -> cg_red
+
 ```
 
+Le grapihque ci-dessous nous montre que les variations du taux de croissance via la seconde équation (ligne rouge sur le graphique) sont plus forte que sur la première équation.
 
 ```{r}
-chart(cg_train, skw ~ date) +
+chart(cg_red, gr ~ date) +
   geom_point() +
-  geom_line() -> a
-
-chart(cg_train, skw_log ~ date) +
-  geom_point() +
-  geom_line() -> b
-
-combine_charts(list(a,b))
+  geom_line() +
+  geom_point( f_aes(gr1 ~ date), color = "red") +
+  geom_line( f_aes(gr1 ~ date), color = "red") +
+  labs(y = "Taux de croissance exponentiel [%/J]", x = "Temps [J]") 
 ```
-
-
-```{r}
-lm1 <- lm(data = cg_train, skw_log ~ date)
-coef1 <- lm1$coefficients[2]
-lm2 <- lm(data = cg_train, skw ~ date)
-coef2 <- lm2$coefficients[2]
-```
-
-```{r}
-dt <- tibble(date = seq(from = min(cg_red$date), to = max(cg_red$date) + 20))
-dt$y <- min(cg_red$skw, na.rm = TRUE) * exp(coef1*dt$date)
-dt$y1 <- min(cg_red$skw, na.rm = TRUE) + coef2*dt$date
-
-chart(cg_red, skw ~ date) +
-  geom_point() +
-  geom_line(f_aes(y ~ date), data = dt) +
-  geom_line(f_aes(y1 ~ date), data = dt, color = "red")
-```
-
 
 # Bibliographie
