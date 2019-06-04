@@ -17,3 +17,6 @@
 ^codecov\.yml$
 ^vignettes/skeleton_weight\.Rmd$
 ^vignettes/growth_rate\.Rmd$
+^vignettes/Optimisation-de-la-vitesse-d-ex-cution-de-la-fonction-\.Rmd$
+^vignettes/tt\.Rmd$
+^vignettes/opti_growth_rate\.Rmd$

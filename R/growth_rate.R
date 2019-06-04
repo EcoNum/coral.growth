@@ -19,22 +19,11 @@
 #' ## See \url{https://econum.github.io/coral.growth/articles/} for more examples
 #'
 growth_rate <- function(skw_t, skw_ini, date_t, date_ini = 0,
-                        method = "exponential") {
-
-  # implemented method
-  met <- c("exponential", "linear", "linear_std")
-
-  # check method
-  if(!any(met %in% method))
-    stop("the method is not implemented. see the help page")
-
-  # method
-  if (method == "exponential") {
-    gr <- (log(skw_t/skw_ini)/(date_t - date_ini))*100
-  } else if (method == "linear") {
-    gr <- (skw_t/skw_ini)/(date_t - date_ini)
-  } else if (method == "linear_std") {
-    gr <- (((skw_t/skw_ini)/skw_ini)/(date_t - date_ini))*100
-  }
-  gr
+                        method = c("exponential", "linear", "linear_std")) {
+  method <- match.arg(method)
+  switch(method,
+         exponential = log(skw_t/skw_ini) / (date_t - date_ini) * 100,
+         linear      = (skw_t - skw_ini) / (date_t - date_ini),
+         linear_std  = (skw_t - skw_ini) / skw_ini / (date_t - date_ini) * 100
+  )
 }

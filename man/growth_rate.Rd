@@ -5,7 +5,7 @@
 \title{Compute the growth rate}
 \usage{
 growth_rate(skw_t, skw_ini, date_t, date_ini = 0,
-  method = "exponential")
+  method = c("exponential", "linear", "linear_std"))
 }
 \arguments{
 \item{skw_t}{The weight at time t}

@@ -74,25 +74,14 @@ Ce graphique démontre que les deux coefficients ne sont pas comparable.
 Le calcul des différents taux de croissance peut être réalisé à l'aide de la fonction suivante : 
 
 ```{r function, eval=F}
-growth_rate <- function(skw_t, skw_ini, date_t, date_ini = 0,
-                        method = "exponential") {
-
-  # implemented method
-  met <- c("exponential", "linear", "linear_std")
-
-  # check method
-  if(!any(met %in% method))
-    stop("the method is not implemented. see the help page")
-
-  # method
-  if (method == "exponential") {
-    gr <- (log(skw_t/skw_ini)/(date_t - date_ini))*100
-  } else if (method == "linear") {
-    gr <- (skw_t/skw_ini)/(date_t - date_ini)
-  } else if (method == "linear_std") {
-    gr <- (((skw_t/skw_ini)/skw_ini)/(date_t - date_ini))*100
-  }
-  gr
+growth_rate <- function(skw_t, skw_ini, date_t, date_ini = 0, 
+                         method = c("exponential", "linear", "linear_std")) {
+ method <- match.arg(method)
+ switch(method,
+   exponential = log(skw_t/skw_ini) / (date_t - date_ini) * 100,
+   linear      = (skw_t - skw_ini) / (date_t - date_ini), 
+   linear_std  = (skw_t - skw_ini) / skw_ini / (date_t - date_ini) * 100
+ )
 }
 ```
 
@@ -111,9 +100,6 @@ growth_rate(skw_t = 1.2, skw_ini = 1,
 
 growth_rate(skw_t = 1.2, skw_ini = 1, 
             date_t = 7, date_ini = 0, method = "linear_std")
-            
-testthat::expect_error(growth_rate(skw_t = 1.2, skw_ini = 1, 
-                                   date_t = 7, date_ini = 0, method = "expo"))
 ```
 
 # But
@@ -220,7 +206,7 @@ $$\frac{ ln( \frac{X_t}{X_{t-1}})}{t - t_{t-1}} \times 100$$
 
 ```{r}
 cg_red %>.%
-  mutate(., 
+  mutate(.,
          skw_ini = first(skw),
          skw_ini1 = lag(skw),
          date_ini1 = lag(date),
@@ -243,5 +229,65 @@ chart(cg_red, gr ~ date) +
   geom_line( f_aes(gr1 ~ date), color = "red") +
   labs(y = "Taux de croissance exponentiel [%/J]", x = "Temps [J]") 
 ```
+
+
+# Vitesse d'exécution de la fonction `growth_rate()`
+
+La première fonction implémentée pour 
+
+```{r}
+dt <- data_frame(date = 1:100000000, skw = 1*exp(date*0.01))
+```
+
+Un jeu de données exemple est proposé pour tester la vitesse d'exécution des fonctions d'une longueur `r nrow(dt)`. 
+
+```{r}
+growth_rate1 <- function(skw_t, skw_ini, date_t, date_ini = 0,
+                        method = "exponential") {
+
+  # implemented method
+  met <- c("exponential", "linear", "linear_std")
+
+  # check method
+  if(!any(met %in% method))
+    stop("the method is not implemented. see the help page")
+
+  # method
+  if (method == "exponential") {
+    gr <- (log(skw_t/skw_ini)/(date_t - date_ini))*100
+  } else if (method == "linear") {
+    gr <- (skw_t-skw_ini)/(date_t - date_ini)
+  } else if (method == "linear_std") {
+    gr <- (((skw_t-skw_ini)/skw_ini)/(date_t - date_ini))*100
+  }
+  gr
+}
+
+(t1 <- system.time(growth_rate1(skw_t = dt$skw, skw_ini = 1, 
+                 date_t = dt$date, date_ini = 0, 
+                 method = "exponential")))
+```
+
+Le temps nécessaire pour réaliser l'opération avec la fonction growth_rate1 `r t1["elapsed"]` $ms$. 
+
+```{r}
+growth_rate2 <- function(skw_t, skw_ini, date_t, date_ini = 0, 
+                         method = c("exponential", "linear", "linear_std")) {
+ method <- match.arg(method)
+ switch(method,
+   exponential = log(skw_t/skw_ini) / (date_t - date_ini) * 100,
+   linear      = (skw_t - skw_ini) / (date_t - date_ini), 
+   linear_std  = (skw_t - skw_ini) / skw_ini / (date_t - date_ini) * 100
+ )
+}
+
+(t2 <- system.time(growth_rate2(skw_t = dt$skw, skw_ini = 1, 
+                         date_t = dt$date, date_ini = 0, 
+                         method = "exponential"))) 
+```
+
+Le temps nécessaire pour réaliser l'opération avec la fonction growth_rate2 `r t2["elapsed"]` $ms$. 
+
+La seconde fonction est `r round((t1["elapsed"] / t2["elapsed"]), digits = 3)` fois plus rapide que la première fonction. 
 
 # Bibliographie
