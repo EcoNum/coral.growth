@@ -160,35 +160,20 @@ cg_red %>.%
 
 Prennons l'individu `r unique(cg_red$id)` afin d'étudier le croissance de cet organisme. Sa masse squelettique varie entre `r round(min(cg_red$skw, na.rm = TRUE),2)` et `r round(max(cg_red$skw, na.rm = TRUE),2)`. Un jeu de données d'apprentissage va être réalisée contenant 2/3 des premières observations de croissance. Les observations supplémentaires vont être employées afin de valider les modèles.
 
+Si la croissance suit un modèle exponentiel il est possible de linéariser les observations avec la transformation mathématique logarithmique 
+
 ```{r}
 chart(cg_train, skw ~ date) +
   geom_point() +
   geom_line() +
-  labs(y = "Masse squelettique [g]", x = "Temps [J]")
-```
+  labs(y = "Masse squelettique [g]", x = "Temps [J]") -> a
 
-Si la croissance suit un modèle exponentiel il est possible de linéariser les observations avec la transformation mathématique logarithmique 
-
-```{r}
 chart(cg_train, skw_log ~ date) +
   geom_point() +
   geom_line() +
-  labs(y = "Logarithme de la asse squelettique", x = "Temps [J]")
-```
+  labs(y = "Logarithme de la asse squelettique", x = "Temps [J]") -> b
 
-
-```{r}
-# chart(cg_train, skw ~ date) +
-#   geom_point() +
-#   geom_line() +
-#   labs(y = "Masse squelettique [g]", x = "Temps [J]") -> a
-# 
-# chart(cg_train, skw_log ~ date) +
-#   geom_point() +
-#   geom_line() +
-#   labs(y = "Logarithme de la asse squelettique", x = "Temps [J]") -> b
-# 
-# combine_charts(list(a,b))
+combine_charts(list(a,b))
 ```
 
 ```{r}
