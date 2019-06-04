@@ -5,8 +5,6 @@
 
 # coral.growth
 
-<!-- badges: start -->
-
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![License:
@@ -19,7 +17,6 @@ status](https://ci.appveyor.com/api/projects/status/github/EcoNum/coral.growth?b
 coverage](https://codecov.io/gh/EcoNum/coral.growth/branch/master/graph/badge.svg)](https://codecov.io/gh/EcoNum/coral.growth?branch=master)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/coral.growth)](https://cran.r-project.org/package=coral.growth)
-<!-- badges: end -->
 
 Coral reefs are considered one of the most biodiverse marine ecosystems
 on the planet. Coral reefs host a large and various communities of
@@ -36,12 +33,21 @@ examples datasets to study the growth of the coral.
 
 ## Installation
 
+### Latest stable version
+
+The latest stable version of `coral.growth` can simply be installed from
+Github with :
+
+``` r
+remotes::install_github("econum/coral.growth@v0.0.1")
+```
+
 ### Development version
 
 You can install the devlopment version of coral.growth from Github with:
 
 ``` r
-remotes::install_github("econum/seal.econum", build_vignettes = TRUE)
+remotes::install_github("econum/coral.growth")
 ```
 
 ## Contributors

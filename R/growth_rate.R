@@ -16,7 +16,7 @@
 #' growth_rate(skw_t = 1.2, skw_ini = 1, date_t = 7, date_ini = 0,
 #' method = "exponential")
 #'
-#' ## See \url{https://econum.github.io/coral.growth/articles/} for more examples
+#' # See \url{https://econum.github.io/coral.growth/articles/} for more examples
 #'
 growth_rate <- function(skw_t, skw_ini, date_t, date_ini = 0,
                         method = c("exponential", "linear", "linear_std")) {

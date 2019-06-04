@@ -29,6 +29,6 @@ The determination of the growth rate is a important parameter. Indeed, the growt
 growth_rate(skw_t = 1.2, skw_ini = 1, date_t = 7, date_ini = 0,
 method = "exponential")
 
-## See \\url{https://econum.github.io/coral.growth/articles/} for more examples
+# See \\url{https://econum.github.io/coral.growth/articles/} for more examples
 
 }

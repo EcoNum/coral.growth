@@ -18,14 +18,12 @@ knitr::opts_chunk$set(
 
 # coral.growth
 
-<!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Travis build status](https://travis-ci.org/EcoNum/coral.growth.svg?branch=master)](https://travis-ci.org/EcoNum/coral.growth)
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/EcoNum/coral.growth?branch=master&svg=true)](https://ci.appveyor.com/project/EcoNum/coral.growth)
 [![Codecov test coverage](https://codecov.io/gh/EcoNum/coral.growth/branch/master/graph/badge.svg)](https://codecov.io/gh/EcoNum/coral.growth?branch=master)
 [![CRAN status](https://www.r-pkg.org/badges/version/coral.growth)](https://cran.r-project.org/package=coral.growth)
-<!-- badges: end -->
 
 
 Coral reefs are considered one of the most biodiverse marine ecosystems on the planet. Coral reefs host a large and various communities of organisms such as fishes, echinoderms, plankton, etc. The coral reef is a perfect example of the Darwin Paradox, i.e. it has a high productivity when the available nutrients are low (oligotrophic seawater). The protection of this ecosystem must be protected. 
@@ -36,12 +34,20 @@ The goal of coral.growth package is to propose several functions and examples da
 
 ## Installation
 
+### Latest stable version
+
+The latest stable version of `coral.growth` can simply be installed from Github with :
+
+``` r
+remotes::install_github("econum/coral.growth@v0.0.1")
+```
+
 ### Development version
 
 You can install the devlopment version of coral.growth from Github with:
 
 ``` r
-remotes::install_github("econum/seal.econum", build_vignettes = TRUE)
+remotes::install_github("econum/coral.growth")
 ```
 
 ## Contributors
