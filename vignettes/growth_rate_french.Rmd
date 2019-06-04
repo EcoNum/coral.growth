@@ -173,7 +173,8 @@ chart(cg_train, skw_log ~ date) +
   geom_line() +
   labs(y = "Logarithme de la asse squelettique", x = "Temps [J]") -> b
 
-combine_charts(list(a,b))
+ggpubr::ggarrange(plotlist = list(a,b))
+#combine_charts(list(a,b))
 ```
 
 ```{r}
