@@ -2,7 +2,6 @@
 output: github_document
 ---
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
@@ -12,9 +11,6 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
-
-
-<img src="man/figures/EcoNum-logo.png" width="70" height="70" align="right"/>
 
 # coral.growth
 
@@ -57,6 +53,14 @@ remotes::install_github("econum/coral.growth")
 - [Philippe Grosjean](https://github.com/phgrosjean)
 
 ## Note
+
+<img src="man/figures/EcoNum-logo.png" width="70" height="70" align="left"/>  This package is developped for the Numerical Ecology of Aquatic Systems.
+
+
+To learn more, please visit <https://econum.github.io>
+
+----------------
+
 
 <img src="man/figures/site-title.png" width="130" height="50" align="left"/>    This package is developped with the SciViews Box 2019. 
 

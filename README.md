@@ -1,8 +1,4 @@
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
-<img src="man/figures/EcoNum-logo.png" width="70" height="70" align="right"/>
-
 # coral.growth
 
 [![Lifecycle:
@@ -58,6 +54,14 @@ remotes::install_github("econum/coral.growth")
 Grosjean](https://github.com/phgrosjean)
 
 ## Note
+
+<img src="man/figures/EcoNum-logo.png" width="70" height="70" align="left"/>
+This package is developped for the Numerical Ecology of Aquatic Systems.
+
+To learn more, please visit
+<https://econum.github.io>
+
+-----
 
 <img src="man/figures/site-title.png" width="130" height="50" align="left"/>
 This package is developped with the SciViews Box 2019.
