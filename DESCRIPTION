@@ -7,13 +7,14 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.0
 Suggests: 
     knitr,
     rmarkdown,
     testthat,
     covr
 VignetteBuilder: knitr
+Depends: R (>= 3.5)
 Imports: 
     seacarb,
     magrittr

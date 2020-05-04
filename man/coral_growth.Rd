@@ -4,14 +4,16 @@
 \name{coral_growth}
 \alias{coral_growth}
 \title{Buoyant weight of corals over 56 days}
-\format{A data frame with 5 variables and 302 observations:
+\format{
+A data frame with 5 variables and 302 observations:
 \describe{
 \item{\code{id}}{A \strong{factor} with 10 levels.}
 \item{\code{date}}{Number day.}
 \item{\code{weight}}{Buoyant weight (in g).}
 \item{\code{salinity}}{Salinity (in PSU).}
 \item{\code{temperature}}{Temperature (in degree celsius).}
-}}
+}
+}
 \usage{
 coral_growth
 }

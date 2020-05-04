@@ -6,7 +6,7 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 [![License:
 MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Travis build
-status](https://travis-ci.org/EcoNum/coral.growth.svg?branch=master)](https://travis-ci.org/EcoNum/coral.growth)
+status](https://travis-ci.com/EcoNum/coral.growth.svg?branch=master)](https://travis-ci.com/EcoNum/coral.growth)
 [![AppVeyor build
 status](https://ci.appveyor.com/api/projects/status/github/EcoNum/coral.growth?branch=master&svg=true)](https://ci.appveyor.com/project/GuyliannEngels/coral-growth)
 [![Codecov test
